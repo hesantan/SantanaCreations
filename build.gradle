@@ -1,4 +1,13 @@
-apply plugin: 'java'
+plugins {
+	id 'java'
+	id 'groovy'
+	id 'net.saliman.cobertura' version '2.3.1'
+    id 'com.github.kt3k.coveralls' version '2.6.3'
+}
+
+group = 'santanacreations'
+version = '0.0.1.0'
+description = """Common library code"""
 
 sourceCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
@@ -16,14 +25,28 @@ if (!hasProperty('mainClass')) {
 
 repositories {
     mavenCentral()
-    // You may define additional repositories, or even remove "mavenCentral()".
-    // Read more about repositories here:
-    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:repositories
 }
 
 dependencies {
-    // TODO: Add dependencies here ...
-    // You can read more about how to add dependency here:
-    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
     testCompile group: 'junit', name: 'junit', version: '4.10'
+	testRuntime "org.slf4j:slf4j-api:1.7.10"
+}
+
+test {
+    filter {
+        includeTestsMatching "*Test"
+    }
+}
+
+cobertura {
+	coverageFormats = ['html','xml']
+	coverageReportDir = new File("$buildDir/reports/cobertura")
+	coverageIgnoreTrivial = true
+	coverageIgnores = ['org.slf4j.Logger.*']
+}
+
+test.finalizedBy(project.tasks.coberturaCheck)
+
+coveralls {
+	
 }
