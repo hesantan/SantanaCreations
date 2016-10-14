@@ -2,24 +2,17 @@ plugins {
 	id 'java'
 	id 'groovy'
 	id 'net.saliman.cobertura' version '2.3.1'
-    id 'com.github.kt3k.coveralls' version '2.6.3'
+	id 'com.github.kt3k.coveralls' version '2.6.3'
 	id "org.sonarqube" version "2.1"
 }
 
 group = 'santanacreations'
-version = '0.0.1.0'
+version = '1.0.0.0'
 description = """Common library code"""
 
 sourceCompatibility = '1.7'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-// NetBeans will automatically add "run" and "debug" tasks relying on the
-// "mainClass" property. You may however define the property prior executing
-// tasks by passing a "-PmainClass=<QUALIFIED_CLASS_NAME>" argument.
-//
-// Note however, that you may define your own "run" and "debug" task if you
-// prefer. In this case NetBeans will not add these tasks but you may rely on
-// your own implementation.
 if (!hasProperty('mainClass')) {
     ext.mainClass = ''
 }
@@ -31,14 +24,6 @@ repositories {
 dependencies {
 	testCompile 'junit:junit:4.12'
 	testRuntime "org.slf4j:slf4j-api:1.7.10"
-}
-
-allprojects {
-  ext.baseVersion = "0.1"
-  //ext.snapshotVersion = true
-
-  group = "org.sonarqube"
-  //version = "$baseVersion" + (snapshotVersion ? "-SNAPSHOT" : "")
 }
 
 test {
@@ -55,12 +40,14 @@ cobertura {
 	coverageIgnores = ['org.slf4j.Logger.*']
 }
 
-test.finalizedBy(project.tasks.coberturaCheck)
-
 sonarqube {
     properties {
 		property "sonar.projectKey", "SantanaCreations"
         property "sonar.projectName", "Santana Creations"
 		property "sonar.projectDescription", "Common library code"
+		property "sonar.sourceEncoding", "UTF-8"
     }
 }
+
+test.finalizedBy(project.tasks.coberturaCheck)
+test.finalizedBy(project.tasks.sonarqube)
