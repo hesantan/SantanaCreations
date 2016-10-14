@@ -59,8 +59,8 @@ test.finalizedBy(project.tasks.coberturaCheck)
 
 sonarqube {
     properties {
-		property "sonar.projectKey", "org.sonarqube:java-gradle-simple"
-        property "sonar.projectName", "Java :: Simple Project :: SonarQube Scanner for Gradle"
-		property "sonar.projectDescription", ""
+		property "sonar.projectKey", "SantanaCreations"
+        property "sonar.projectName", "Santana Creations"
+		property "sonar.projectDescription", "Common library code"
     }
 }
