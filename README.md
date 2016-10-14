@@ -18,3 +18,7 @@ Code Climate
 [![Test Coverage](https://codeclimate.com/github/hesantan/SantanaCreations/badges/coverage.svg)](https://codeclimate.com/github/hesantan/SantanaCreations/coverage)
 
 [![Issue Count](https://codeclimate.com/github/hesantan/SantanaCreations/badges/issue_count.svg)](https://codeclimate.com/github/hesantan/SantanaCreations)
+
+SonarQube.com
+
+[![Quality Gate](https://sonarqube.com/api/badges/gate?key=SantanaCreations)](https://sonarqube.com/dashboard/index/SantanaCreations)
