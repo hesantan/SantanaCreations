@@ -124,9 +124,9 @@ public abstract class AbstractHttpProxy {
             urlConnection.setRequestProperty("Content-Type", contentType);
 			
 			if (headers != null && !headers.isEmpty()) {
-				headers.entrySet().stream().forEach((entry) -> {
+				for (Map.Entry<String, String> entry : headers.entrySet()) {
 					urlConnection.setRequestProperty(entry.getKey(), entry.getValue());
-				});
+				}
 			}
 			
             int responseCode = urlConnection.getResponseCode();

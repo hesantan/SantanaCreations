@@ -72,16 +72,12 @@ public class ZillowHttpProxyTest {
 	
 	@Test
 	public void doGetTest() {
-		/*
-		_zillowWebServices.stream().forEach((String zillowWebService) -> {
+		for (String zillowWebService : _zillowWebServices) {
 			for (String testAddress : _testAddresses) {
-				//String serviceUri = zillowWebService + "?" + "address=" + testAddress;
-				String responseString = "String"; //_zillowHttpProxy.doGet(buildUri(serviceUri));
+				String serviceUri = zillowWebService + "?" + "address=" + testAddress;
+				String responseString = _zillowHttpProxy.doGet(buildUri(serviceUri));
 				Assert.assertTrue("A response was recieved for " + zillowWebService + ".", !"".equals(responseString));
 			}
-		});*/
-		
-		String responseString = "String"; //_zillowHttpProxy.doGet(buildUri(serviceUri));
-				Assert.assertTrue("A response was recieved for " + "Test" + ".", !"".equals(responseString));
+		}
 	}
 }
