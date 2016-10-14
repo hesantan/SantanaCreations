@@ -46,6 +46,7 @@ sonarqube {
         property "sonar.projectName", "Santana Creations"
 		property "sonar.projectDescription", "Common library code"
 		property "sonar.sourceEncoding", "UTF-8"
+		property "sonar.host.url", "https://sonarqube.com"
     }
 }
 
