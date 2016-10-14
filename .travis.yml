@@ -5,8 +5,8 @@ addons:
   sonarqube: true
 env:
   global:
-    - secure: SONAR_TOKEN=QaFw79QSxEzZ2N18kNhkM+DgBajbaIdU5LRsqFT0bryKrFRe8zzKRHT9WDBorMifsZc+wj2Bsthv5p6T5rkEC+NHPakalFpPsmQ8n7+gRpYcGleYLvJ2joh0bDq/joiZvNZ6+AVYe8Q3so25sW0DkDwqxLi4T4g+xImRvORwLamvjEIhBGympmFYX4L57HhveIlhUlT+uHjQV8WhX/YLFapBYlTdrpEbfateBMglCTGsiGpOUcrrxZXnIOWcsts6I1WxjBC8/830s432nJh0B7Id8zDPkiMz77l9gOvu6KTfgGu2TBXpbgcGfmWXUpFfcQ23SefdRTwG57ob744aaE3qooFE6uXgicc9UGHHP8NufpfRqm/lbvjgWpozU4e/5eL2LH/N7+Oh1O/E2vth3LQR1LIihh/o7eMBVQVDCxMPOegazjqwx73Jh8xIjMltMaGE02fpoZsiY3mjGfSu70672Fem5A87afatrYqHFQMqXYQHZvzFfDuGP4PIvRuqsXo7u3zsdLqH+BWwPrMUiA1c/IET5kmzApQqEV5T8CBgIte9tffi44kirTTIIWU/1Djyf7DFCDL/cUza9zyH2VPWtWLShRP/FTmayJVnmHMcVdZBUDhKgBXisartAKxLNkQie1SmpFyT19rhS2XOiHpFH7ES4cGY0mIGimdI4DY=
-script: gradle clean build -Dsonar.login=$SONAR_TOKEN
+    - SONAR_TOKEN=e079d7411acc29609e71e7674500d290ad63eabf
+script: gradle clean build
 after_success:
 - gradle cobertura coveralls
 - sonar-scanner -X -Dsonar.login=$SONAR_TOKEN
