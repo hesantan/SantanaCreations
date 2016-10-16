@@ -24,7 +24,7 @@ import santanacommon.serialization.interfaces.IXmlDeserializer;
  *
  * @author Hector
  */
-public class ZillowPropertyReportXmlDeserializer implements IXmlDeserializer<Document, ZillowPropertyReport> {
+public class ZillowPropertyReportXmlDeserializer implements IXmlDeserializer<ZillowPropertyReport> {
 
     @Override
     public ZillowPropertyReport deserialize(Document xmlDocument) {

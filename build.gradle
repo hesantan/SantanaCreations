@@ -32,13 +32,10 @@ test {
         includeTestsMatching "*Test"
     }
 	ignoreFailures = true
-}
 
-cobertura {
-	coverageFormats = ['html','xml']
-	coverageReportDir = new File("$buildDir/reports/cobertura")
-	coverageIgnoreTrivial = true
-	coverageIgnores = ['org.slf4j.Logger.*']
+	jacoco {
+		classDumpFile = file("$buildDir/jacoco/classpathdumps")
+	}
 }
 
 jacocoTestReport {
@@ -48,6 +45,13 @@ jacocoTestReport {
 		html.destination "${buildDir}/reports/jacoco/jacoco-html"
 		xml.destination "${buildDir}/reports/jacoco/jacoco-xml"
 	}
+}
+
+cobertura {
+	coverageFormats = ['html', 'xml']
+	coverageReportDir = file("$buildDir/reports/cobertura")
+	coverageIgnoreTrivial = true
+	coverageIgnores = ['org.slf4j.Logger.*']
 }
 
 sonarqube {
@@ -63,7 +67,7 @@ sonarqube {
 }
 
 check.dependsOn jacocoTestReport
-//check.dependsOn coberturaCheck
+check.dependsOn coberturaCheck
 
 //test.finalizedBy(project.tasks.coberturaCheck)
 //test.finalizedBy(project.tasks.jacocoTestReport)

@@ -15,15 +15,16 @@
  */
 package santanacommon.serialization.interfaces;
 
+import org.w3c.dom.Document;
+
 /**
  *
  * @author Hector
- * @param <Document>
- * @param <TOutput>
+ * @param <T>
  */
-public interface IXmlDeserializer<Document, TOutput> extends IDeserializer<Document, TOutput> {
+public interface IXmlDeserializer<T> extends IDeserializer<Document, T> {
     
     @Override
-    TOutput deserialize(Document xmlDocument);
+    T deserialize(Document xmlDocument);
     
 }
