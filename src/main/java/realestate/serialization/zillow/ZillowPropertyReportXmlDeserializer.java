@@ -16,19 +16,19 @@
 
 package realestate.serialization.zillow;
 
+import org.w3c.dom.Document;
+import realestate.entities.zillow.ZillowPropertyReport;
 import santanacommon.serialization.interfaces.IXmlDeserializer;
 
 /**
  *
  * @author Hector
- * @param <Document>
- * @param <ZillowPropertyReport>
  */
-public class ZillowPropertyReportXmlDeserializer<Document, ZillowPropertyReport> implements IXmlDeserializer<Document, ZillowPropertyReport> {
+public class ZillowPropertyReportXmlDeserializer implements IXmlDeserializer<Document, ZillowPropertyReport> {
 
     @Override
     public ZillowPropertyReport deserialize(Document xmlDocument) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ZillowPropertyReport();
     }
     
 }

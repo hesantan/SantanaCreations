@@ -24,7 +24,11 @@ import java.net.URLEncoder;
  * @author Santana Creations
  */
 public class Strings {
-    
+	
+	private Strings() {
+		
+	}
+	
     public static boolean isNullOrEmpty(String str) {
 	    return str == null || str.isEmpty();
     }
