@@ -13,17 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package santanacommon.serialization.interfaces;
+
+package santanacommon.utilities;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
+ * TODO: Add summary
  *
  * @author Hector
- * @param <Document>
- * @param <TOutput>
+ * @since 10/16/2016
  */
-public interface IXmlDeserializer<Document, TOutput> extends IDeserializer<Document, TOutput> {
-    
-    @Override
-    TOutput deserialize(Document xmlDocument);
-    
+public class LoggerFactory {
+	
+	public static Logger GetLogger(String loggerName) {
+		Logger log = Logger.getLogger(loggerName);
+		log.setLevel(Level.INFO);
+		return log;
+	}
+	
 }

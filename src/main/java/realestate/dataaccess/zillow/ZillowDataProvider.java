@@ -15,18 +15,20 @@
  */
 package realestate.dataaccess.zillow;
 
-import santanacommon.proxies.base.AbstractHttpProxy;
-
 /**
  *
  * @author Hector
  */
 public class ZillowDataProvider {
-
-	private final AbstractHttpProxy httpProxy;
-    
-	public ZillowDataProvider(AbstractHttpProxy abstractHttpProxy) {
-		httpProxy = abstractHttpProxy;
+	
+	//private final AbstractHttpProxy httpProxy;
+	
+	public ZillowDataProvider() {
+		
 	}
+	
+	//	public ZillowDataProvider(AbstractHttpProxy abstractHttpProxy) {
+	//		httpProxy = abstractHttpProxy;
+	//	}
 	
 }

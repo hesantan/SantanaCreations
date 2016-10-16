@@ -15,6 +15,9 @@
  */
 package santanacommon.proxies.base;
 
+import santanacommon.utilities.LoggerFactory;
+import santanacommon.utilities.Strings;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -22,25 +25,23 @@ import java.net.URL;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import santanacommon.utilities.Strings;
 
 /**
  *
  * @author Santana Creations
  */
 public abstract class AbstractHttpProxy {
-    protected Logger log;
-    private final String ACCEPT_CHARSET;
-    private final String DEFAULT_CONTENT_TYPE;
-    
+	private final String acceptCharset;
+	private final String defaultContentType;
+	private final String deleteMethodName = "DELETE";
+	private final Logger log;
+	
 	protected AbstractHttpProxy(String defaultContentType, String acceptCharset) {
-		ACCEPT_CHARSET = acceptCharset;
-		DEFAULT_CONTENT_TYPE = defaultContentType;
-		
-		log = Logger.getLogger(AbstractHttpProxy.class.getName());
-		log.setLevel(Level.ALL);
-    }
-    
+		this.acceptCharset = acceptCharset;
+		this.defaultContentType = defaultContentType;
+		log = LoggerFactory.GetLogger(getClass().getName());
+	}
+	
 	public String doGet(String uri) {
 		return sendHttpRequest("GET", buildUrl(uri), null);
 	}
@@ -54,7 +55,7 @@ public abstract class AbstractHttpProxy {
 	}
 	
 	public String doDelete(String uri, String data) {
-		return sendHttpRequest("DELETE", buildUrl(uri), data);
+		return sendHttpRequest(deleteMethodName, buildUrl(uri), data);
 	}
     
 	// GET
@@ -83,10 +84,10 @@ public abstract class AbstractHttpProxy {
 				return getRequestContentTypeForPost();
 			case "PUT":
 				return getRequestContentTypeForPut();
-			case "DELETE":
+			case deleteMethodName:
 				return getRequestContentTypeForDelete();
 			default:
-				return DEFAULT_CONTENT_TYPE;
+				return defaultContentType;
 		}
 	}
 	
@@ -98,7 +99,7 @@ public abstract class AbstractHttpProxy {
 				return getRequestHeadersForPost();
 			case "PUT":
 				return getRequestHeadersForPut();
-			case "DELETE":
+			case deleteMethodName:
 				return getRequestHeadersForDelete();
 			default:
 				return null;
@@ -112,16 +113,19 @@ public abstract class AbstractHttpProxy {
 	}
 	
 	private String sendHttpRequest(String method, Map<String, String> headers, String contentType, String url,  String data) {
+		
+		if (Strings.isNullOrEmpty(url)) {
+			return "";
+		}
+		
 		try {
             URL urlObject = new URL(url);
             HttpURLConnection urlConnection = (HttpURLConnection) urlObject.openConnection();
-            
-			contentType = Strings.isNullOrEmpty(contentType) ? DEFAULT_CONTENT_TYPE : contentType;
 			
             urlConnection.setDoOutput(!Strings.isNullOrEmpty(data));
             urlConnection.setRequestMethod(method);
-            urlConnection.setRequestProperty("Accept-Charset", ACCEPT_CHARSET);
-            urlConnection.setRequestProperty("Content-Type", contentType);
+			urlConnection.setRequestProperty("Accept-Charset", acceptCharset);
+			urlConnection.setRequestProperty("Content-Type", Strings.isNullOrEmpty(contentType) ? defaultContentType : contentType);
 			
 			if (headers != null && !headers.isEmpty()) {
 				for (Map.Entry<String, String> entry : headers.entrySet()) {
@@ -133,23 +137,23 @@ public abstract class AbstractHttpProxy {
             
             log.log(Level.INFO, "Sending \"{0}\" request to URL : {1}", new Object[]{method, url});
             log.log(Level.INFO, "Response Code : {0}", responseCode);
-            
-            StringBuffer response;
-            
-            try (BufferedReader in = new BufferedReader(
-                new InputStreamReader(urlConnection.getInputStream(), ACCEPT_CHARSET))) {
-                String inputLine;
-                response = new StringBuffer();
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
+			
+			StringBuilder response;
+			
+			try (BufferedReader in = new BufferedReader(
+					new InputStreamReader(urlConnection.getInputStream(), acceptCharset))) {
+				String inputLine;
+				response = new StringBuilder();
+				while ((inputLine = in.readLine()) != null) {
+					response.append(inputLine);
                 }
             } finally {
                 urlConnection.disconnect();
             }
-            
-            return response == null ? "" : response.toString();
-        } catch (Exception ex) {
-            log.log(Level.SEVERE, null, ex);
+			
+			return response.toString();
+		} catch (Exception ex) {
+			log.log(Level.SEVERE, null, ex);
         }
         return "";
 	}

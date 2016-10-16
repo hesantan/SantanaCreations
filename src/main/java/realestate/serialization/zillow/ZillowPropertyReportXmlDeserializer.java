@@ -27,7 +27,7 @@ import santanacommon.serialization.interfaces.IXmlDeserializer;
 public class ZillowPropertyReportXmlDeserializer<Document, ZillowPropertyReport> implements IXmlDeserializer<Document, ZillowPropertyReport> {
 
     @Override
-    public ZillowPropertyReport Deserialize(Document xmlDocument) {
+    public ZillowPropertyReport deserialize(Document xmlDocument) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

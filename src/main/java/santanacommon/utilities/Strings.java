@@ -26,14 +26,14 @@ import java.net.URLEncoder;
 public class Strings {
     
     public static boolean isNullOrEmpty(String str) {
-        return str == null || str.isEmpty();
+	    return str == null || str.isEmpty();
     }
-    
-	public static String urlEncode(String str) throws UnsupportedEncodingException {
+	
+	static String urlEncode(String str) throws UnsupportedEncodingException {
 		return URLEncoder.encode(str, "UTF-8");
 	}
 	
-	public static String urlDecode(String str) throws UnsupportedEncodingException {
+	static String urlDecode(String str) throws UnsupportedEncodingException {
 		return URLDecoder.decode(str, "UTF-8");
 	}
 }

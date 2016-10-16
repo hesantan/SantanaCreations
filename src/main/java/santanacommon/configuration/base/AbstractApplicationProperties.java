@@ -15,27 +15,25 @@
  */
 package santanacommon.configuration.base;
 
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import santanacommon.utilities.Strings;
+
+import java.util.Properties;
 
 /**
  *
  * @author Santana Creations
  */
 public abstract class AbstractApplicationProperties {
-	protected Logger log;
-	protected Properties properties;
 	private static String configFilename = "config.xml";
 	private static String configFileDescription = "Configuration File";
 	private static String configFileEncoding = "UTF-8";
+	//private Logger log;
+	protected final Properties properties;
 	
 	protected AbstractApplicationProperties(String configFileDescriptionString, String configFilenameString, String configFileEncodingString) {
 		properties = new Properties();
 		
-		log = Logger.getLogger(AbstractApplicationProperties.class.getName());
-		log.setLevel(Level.ALL);
+		//log = LoggerFactory.GetLogger(getClass().getName());
 		
 		if (Strings.isNullOrEmpty(configFileDescription)) {
 			configFileDescription = configFileDescriptionString;

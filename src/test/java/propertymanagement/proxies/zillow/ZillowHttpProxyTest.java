@@ -15,28 +15,30 @@
  */
 package propertymanagement.proxies.zillow;
 
-import java.util.Arrays;
-import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import realestate.proxies.zillow.ZillowHttpProxy;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
  *
  * @author Santana Creations
  */
 public class ZillowHttpProxyTest {
-	
-	private final String _baseUrl = "http://www.zillow.com";
-	private final String _apiKey = "X1-ZWz19rhxouu5fv_4ye7m";
+
 	private final ZillowHttpProxy _zillowHttpProxy;
 	private String _baseUri;
 	private List<String> _zillowWebServices;
 	private List<String> _testAddresses;
 	
 	public ZillowHttpProxyTest() {
+		String _baseUrl = "http://www.zillow.com";
+		String _apiKey = "X1-ZWz19rhxouu5fv_4ye7m";
 		_zillowHttpProxy = new ZillowHttpProxy(_baseUrl, _apiKey);
 	}
 	
@@ -47,9 +49,9 @@ public class ZillowHttpProxyTest {
 	@Before
 	public void setUp() {
 		_baseUri = "/webservice/";
-		_zillowWebServices = Arrays.asList(
+		_zillowWebServices = Collections.singletonList(
 			"GetDeepSearchResults.htm"
-			//"GetChart.htm", 
+				//"GetChart.htm",
 			//"GetComps.htm",
 			//"GetDeepComps.htm",
 			//"GetDemographics.htm",
@@ -76,8 +78,26 @@ public class ZillowHttpProxyTest {
 			for (String testAddress : _testAddresses) {
 				String serviceUri = zillowWebService + "?" + "address=" + testAddress;
 				String responseString = _zillowHttpProxy.doGet(buildUri(serviceUri));
-				Assert.assertTrue("A response was recieved for " + zillowWebService + ".", !"".equals(responseString));
+				Assert.assertNotEquals("A response was received for " + zillowWebService + ".", "", responseString);
 			}
 		}
+	}
+	
+	@Test
+	public void doPostTest() {
+		String responseString = _zillowHttpProxy.doPost(null, null);
+		Assert.assertEquals(responseString, "");
+	}
+	
+	@Test
+	public void doPutTest() {
+		String responseString = _zillowHttpProxy.doPut(null, null);
+		Assert.assertEquals(responseString, "");
+	}
+	
+	@Test
+	public void doDeleteTest() {
+		String responseString = _zillowHttpProxy.doDelete(null, null);
+		Assert.assertEquals(responseString, "");
 	}
 }

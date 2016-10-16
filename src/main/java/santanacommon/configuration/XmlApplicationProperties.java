@@ -15,11 +15,14 @@
  */
 package santanacommon.configuration;
 
+import santanacommon.configuration.base.AbstractApplicationProperties;
+import santanacommon.utilities.LoggerFactory;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
-import santanacommon.configuration.base.AbstractApplicationProperties;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,9 +32,11 @@ public class XmlApplicationProperties extends AbstractApplicationProperties {
 	private static final String CONFIG_FILE_DESCRIPTION = "XML Configuration File";
 	private static final String CONFIG_FILENAME = "config.xml";
 	private static final String CONFIG_FILE_ENCODING = "UTF-8";
+	private final Logger log;
 	
 	public XmlApplicationProperties() {
 		super(CONFIG_FILE_DESCRIPTION, CONFIG_FILENAME, CONFIG_FILE_ENCODING);
+		log = LoggerFactory.GetLogger(getClass().getName());
 	}
 	
 	@Override
@@ -45,8 +50,8 @@ public class XmlApplicationProperties extends AbstractApplicationProperties {
 	
 	@Override
 	public void commit() {
-		try (FileOutputStream fileOutputStream = new FileOutputStream(CONFIG_FILENAME)) {
-			properties.storeToXML(fileOutputStream, CONFIG_FILE_DESCRIPTION, CONFIG_FILE_ENCODING);
+		try (FileOutputStream fileOutputStream = new FileOutputStream(getFilename())) {
+			properties.storeToXML(fileOutputStream, getFileDescription(), getFileEncoding());
 		} catch (IOException ex) {
 			log.log(Level.SEVERE, null, ex);
 		}

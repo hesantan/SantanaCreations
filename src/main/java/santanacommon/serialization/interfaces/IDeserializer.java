@@ -18,10 +18,10 @@ package santanacommon.serialization.interfaces;
 /**
  * Interface that defines basic operations for a deserializer
  * @author Santana Creations
- * @param <TInput>  The type to deserialize
- * @param <TOutput> The resulting type of the deserialization
+ * @param <TINPUT>  The type to deserialize
+ * @param <TOUTPUT> The resulting type of the deserialization
  */
-public interface IDeserializer<TInput, TOutput> {
+interface IDeserializer<TINPUT, TOUTPUT> {
     
     /**
      * Deserializes a given object type into another 
@@ -29,5 +29,5 @@ public interface IDeserializer<TInput, TOutput> {
      * @return A object representing the the input object
      * in TOutput type
      */
-    public TOutput Deserialize(TInput object);
+    TOUTPUT deserialize(TINPUT object);
 }

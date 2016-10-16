@@ -15,8 +15,10 @@
  */
 package realestate.proxies.zillow;
 
-import java.util.Map;
 import santanacommon.proxies.base.AbstractHttpProxy;
+import santanacommon.utilities.Strings;
+
+import java.util.Map;
 
 /**
  *
@@ -26,8 +28,7 @@ public class ZillowHttpProxy extends AbstractHttpProxy {
 
 	private final String baseUrl;
 	private final String apiKey;
-	private final String apiKeyIdentifier = "zws-id";
-	
+
 	public ZillowHttpProxy(String baseUrlString, String apiKeyString) {
 		super("text/xml", "UTF-8");
 		baseUrl = baseUrlString;
@@ -36,8 +37,14 @@ public class ZillowHttpProxy extends AbstractHttpProxy {
 	
 	@Override
 	protected String buildUrl(String uri) {
+
+		if (Strings.isNullOrEmpty(uri)) {
+			return "";
+		}
+		
 		String url = baseUrl + uri;
 		url += (uri.contains("?") ? "&" : "?" );
+		String apiKeyIdentifier = "zws-id";
 		url += apiKeyIdentifier + "=" + apiKey;
 		return url;
 	}
