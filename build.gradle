@@ -52,5 +52,5 @@ sonarqube {
     }
 }
 
-test.finalizedBy(project.tasks.coberturaCheck)
-test.finalizedBy(project.tasks.sonarqube)
+//test.finalizedBy(project.tasks.coberturaCheck)
+//test.finalizedBy(project.tasks.sonarqube)
