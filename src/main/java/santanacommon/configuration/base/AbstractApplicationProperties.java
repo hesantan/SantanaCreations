@@ -33,7 +33,7 @@ public abstract class AbstractApplicationProperties {
 	protected AbstractApplicationProperties(String configFileDescriptionString, String configFilenameString, String configFileEncodingString) {
 		properties = new Properties();
 		
-		//log = LoggerFactory.GetLogger(getClass().getName());
+		//log = LoggerFactory.getLogger(getClass().getName());
 		
 		if (Strings.isNullOrEmpty(configFileDescription)) {
 			configFileDescription = configFileDescriptionString;

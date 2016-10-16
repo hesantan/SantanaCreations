@@ -16,11 +16,17 @@
 
 package santanacommon.configuration;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import santanacommon.utilities.LoggerFactory;
+
+import java.io.File;
+import java.util.logging.Logger;
 
 /**
- * TODO: Add summary
+ * XML Configuration file tester
  *
  * @author Hector
  * @since 10/16/2016
@@ -33,14 +39,22 @@ public class XmlApplicationPropertiesTest {
 		xmlApplicationProperties = new XmlApplicationProperties();
 	}
 	
-	@Test
-	public void load() throws Exception {
-		xmlApplicationProperties.load();
+	@Before
+	public void setUp() {
+		xmlApplicationProperties.commit();
+	}
+	
+	@After
+	public void cleanUp() {
+		File configFile = new File(xmlApplicationProperties.getFilename());
+		boolean deleted = configFile.delete();
+		Logger log = LoggerFactory.getLogger(XmlApplicationProperties.class.getName());
+		log.info("Test Config file was " + (deleted ? "" : "not ") + "deleted");
 	}
 	
 	@Test
-	public void commit() throws Exception {
-		xmlApplicationProperties.commit();
+	public void load() {
+		xmlApplicationProperties.load();
 	}
 	
 	@Test
@@ -49,5 +63,4 @@ public class XmlApplicationPropertiesTest {
 		Assert.assertEquals("config.xml", xmlApplicationProperties.getFilename());
 		Assert.assertEquals("UTF-8", xmlApplicationProperties.getFileEncoding());
 	}
-	
 }

@@ -20,14 +20,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * TODO: Add summary
+ * Logger factory for package classes
  *
  * @author Hector
  * @since 10/16/2016
  */
 public class LoggerFactory {
 	
-	public static Logger GetLogger(String loggerName) {
+	public static Logger getLogger(String loggerName) {
 		Logger log = Logger.getLogger(loggerName);
 		log.setLevel(Level.INFO);
 		return log;

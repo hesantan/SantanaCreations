@@ -36,7 +36,7 @@ public class XmlApplicationProperties extends AbstractApplicationProperties {
 	
 	public XmlApplicationProperties() {
 		super(CONFIG_FILE_DESCRIPTION, CONFIG_FILENAME, CONFIG_FILE_ENCODING);
-		log = LoggerFactory.GetLogger(getClass().getName());
+		log = LoggerFactory.getLogger(getClass().getName());
 	}
 	
 	@Override

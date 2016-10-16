@@ -39,7 +39,7 @@ public abstract class AbstractHttpProxy {
 	protected AbstractHttpProxy(String defaultContentType, String acceptCharset) {
 		this.acceptCharset = acceptCharset;
 		this.defaultContentType = defaultContentType;
-		log = LoggerFactory.GetLogger(getClass().getName());
+		log = LoggerFactory.getLogger(getClass().getName());
 	}
 	
 	public String doGet(String uri) {
