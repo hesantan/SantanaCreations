@@ -29,7 +29,7 @@ public class ZillowDataProvider {
 		httpProxy = zillowHttpProxy;
 	}
 	
-	public String GetDeepSearchResults() {
+	public String getDeepSearchResults() {
 		return httpProxy.doGet("GetDeepSearchResults.htm");
 	}
 	

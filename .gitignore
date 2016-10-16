@@ -2,3 +2,6 @@
 src/main/resources/
 src/test/resources/
 build/
+.gradle/
+src/main/groovy/
+src/test/groovy/

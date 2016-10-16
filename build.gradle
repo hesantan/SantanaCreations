@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'santanacreations'
-version = '1.0.0.0'
+version = '1.0'
 description = """Common library code"""
 
 sourceCompatibility = '1.7'
@@ -47,8 +47,10 @@ sonarqube {
 		property "sonar.projectDescription", "Common library code"
 		property "sonar.sourceEncoding", "UTF-8"
 		property "sonar.host.url", "https://sonarqube.com"
+		property "sonar.java.libraries", dependencyCacheDir.getPath()
+		property "sonar.java.test.libraries", dependencyCacheDir.getPath()
     }
 }
 
-//test.finalizedBy(project.tasks.coberturaCheck)
-//test.finalizedBy(project.tasks.sonarqube)
+test.finalizedBy(project.tasks.coberturaCheck)
+test.finalizedBy(project.tasks.sonarqube)

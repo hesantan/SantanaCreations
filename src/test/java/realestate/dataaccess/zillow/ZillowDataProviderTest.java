@@ -35,8 +35,8 @@ public class ZillowDataProviderTest {
 	}
 	
 	@Test
-	public void getDeepSearchResultsTest() throws Exception {
-		Assert.assertNotEquals("", zillowDataProvider.GetDeepSearchResults());
+	public void getDeepSearchResultsTest() {
+		Assert.assertNotEquals("", zillowDataProvider.getDeepSearchResults());
 	}
 	
 }

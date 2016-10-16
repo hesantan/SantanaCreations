@@ -31,7 +31,7 @@ import java.util.logging.Logger;
  * @author Santana Creations
  */
 public abstract class AbstractHttpProxy {
-	private static final String deleteMethodName = "DELETE";
+	private static final String DELETE_METHOD_NAME = "DELETE";
 	private final String acceptCharset;
 	private final String defaultContentType;
 	private final Logger log;
@@ -55,7 +55,7 @@ public abstract class AbstractHttpProxy {
 	}
 	
 	public String doDelete(String uri, String data) {
-		return sendHttpRequest(deleteMethodName, buildUrl(uri), data);
+		return sendHttpRequest(DELETE_METHOD_NAME, buildUrl(uri), data);
 	}
     
 	// GET
@@ -84,7 +84,7 @@ public abstract class AbstractHttpProxy {
 				return getRequestContentTypeForPost();
 			case "PUT":
 				return getRequestContentTypeForPut();
-			case deleteMethodName:
+			case DELETE_METHOD_NAME:
 				return getRequestContentTypeForDelete();
 			default:
 				return defaultContentType;
@@ -99,7 +99,7 @@ public abstract class AbstractHttpProxy {
 				return getRequestHeadersForPost();
 			case "PUT":
 				return getRequestHeadersForPut();
-			case deleteMethodName:
+			case DELETE_METHOD_NAME:
 				return getRequestHeadersForDelete();
 			default:
 				return null;
