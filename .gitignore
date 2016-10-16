@@ -1,6 +1,4 @@
 .idea/
-src/main/groovy/
 src/main/resources/
-src/test/groovy/
 src/test/resources/
 build/

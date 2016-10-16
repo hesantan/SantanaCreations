@@ -42,7 +42,7 @@ public class ZillowHttpProxy extends AbstractHttpProxy {
 			return "";
 		}
 		
-		String url = baseUrl + uri;
+		String url = baseUrl + "/webservice/" + uri;
 		url += (uri.contains("?") ? "&" : "?" );
 		String apiKeyIdentifier = "zws-id";
 		url += apiKeyIdentifier + "=" + apiKey;

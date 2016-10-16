@@ -31,9 +31,9 @@ import java.util.logging.Logger;
  * @author Santana Creations
  */
 public abstract class AbstractHttpProxy {
+	private static final String deleteMethodName = "DELETE";
 	private final String acceptCharset;
 	private final String defaultContentType;
-	private final String deleteMethodName = "DELETE";
 	private final Logger log;
 	
 	protected AbstractHttpProxy(String defaultContentType, String acceptCharset) {

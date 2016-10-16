@@ -30,26 +30,20 @@ import java.util.List;
  * @author Santana Creations
  */
 public class ZillowHttpProxyTest {
-
-	private final ZillowHttpProxy _zillowHttpProxy;
-	private String _baseUri;
-	private List<String> _zillowWebServices;
-	private List<String> _testAddresses;
+	
+	private final ZillowHttpProxy zillowHttpProxy;
+	private List<String> zillowWebServices;
+	private List<String> testAddresses;
 	
 	public ZillowHttpProxyTest() {
-		String _baseUrl = "http://www.zillow.com";
-		String _apiKey = "X1-ZWz19rhxouu5fv_4ye7m";
-		_zillowHttpProxy = new ZillowHttpProxy(_baseUrl, _apiKey);
-	}
-	
-	private String buildUri(String serviceUri) {
-		return _baseUri + serviceUri;
+		String baseUrl = "http://www.zillow.com";
+		String apiKey = "X1-ZWz19rhxouu5fv_4ye7m";
+		zillowHttpProxy = new ZillowHttpProxy(baseUrl, apiKey);
 	}
 	
 	@Before
 	public void setUp() {
-		_baseUri = "/webservice/";
-		_zillowWebServices = Collections.singletonList(
+		zillowWebServices = Collections.singletonList(
 			"GetDeepSearchResults.htm"
 				//"GetChart.htm",
 			//"GetComps.htm",
@@ -60,7 +54,7 @@ public class ZillowHttpProxyTest {
 			//"GetSearchResults.htm",
 			//"GetZestimate.htm"
 		);
-		_testAddresses = Arrays.asList(
+		testAddresses = Arrays.asList(
 			"2114+Bigelow+Ave&citystatezip=Seattle%2C+WA", 
 			"1456+Test+Address&citystatezip=Minnetonka%2C+MN+55426"
 		);
@@ -68,16 +62,16 @@ public class ZillowHttpProxyTest {
 	
 	@After
 	public void tearDown() {
-		_zillowWebServices = null;
-		_testAddresses = null;
+		zillowWebServices = null;
+		testAddresses = null;
 	}
 	
 	@Test
 	public void doGetTest() {
-		for (String zillowWebService : _zillowWebServices) {
-			for (String testAddress : _testAddresses) {
+		for (String zillowWebService : zillowWebServices) {
+			for (String testAddress : testAddresses) {
 				String serviceUri = zillowWebService + "?" + "address=" + testAddress;
-				String responseString = _zillowHttpProxy.doGet(buildUri(serviceUri));
+				String responseString = zillowHttpProxy.doGet(serviceUri);
 				Assert.assertNotEquals("A response was received for " + zillowWebService + ".", "", responseString);
 			}
 		}
@@ -85,19 +79,19 @@ public class ZillowHttpProxyTest {
 	
 	@Test
 	public void doPostTest() {
-		String responseString = _zillowHttpProxy.doPost(null, null);
+		String responseString = zillowHttpProxy.doPost(null, null);
 		Assert.assertEquals(responseString, "");
 	}
 	
 	@Test
 	public void doPutTest() {
-		String responseString = _zillowHttpProxy.doPut(null, null);
+		String responseString = zillowHttpProxy.doPut(null, null);
 		Assert.assertEquals(responseString, "");
 	}
 	
 	@Test
 	public void doDeleteTest() {
-		String responseString = _zillowHttpProxy.doDelete(null, null);
+		String responseString = zillowHttpProxy.doDelete(null, null);
 		Assert.assertEquals(responseString, "");
 	}
 }

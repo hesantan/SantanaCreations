@@ -27,13 +27,10 @@ public abstract class AbstractApplicationProperties {
 	private static String configFilename = "config.xml";
 	private static String configFileDescription = "Configuration File";
 	private static String configFileEncoding = "UTF-8";
-	//private Logger log;
 	protected final Properties properties;
 	
 	protected AbstractApplicationProperties(String configFileDescriptionString, String configFilenameString, String configFileEncodingString) {
 		properties = new Properties();
-		
-		//log = LoggerFactory.getLogger(getClass().getName());
 		
 		if (Strings.isNullOrEmpty(configFileDescription)) {
 			configFileDescription = configFileDescriptionString;

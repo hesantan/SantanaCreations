@@ -27,6 +27,10 @@ import java.util.logging.Logger;
  */
 public class LoggerFactory {
 	
+	private LoggerFactory() {
+		
+	}
+	
 	public static Logger getLogger(String loggerName) {
 		Logger log = Logger.getLogger(loggerName);
 		log.setLevel(Level.INFO);

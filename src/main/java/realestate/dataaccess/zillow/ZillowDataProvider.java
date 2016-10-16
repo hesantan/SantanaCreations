@@ -15,20 +15,22 @@
  */
 package realestate.dataaccess.zillow;
 
+import realestate.proxies.zillow.ZillowHttpProxy;
+
 /**
  *
  * @author Hector
  */
 public class ZillowDataProvider {
 	
-	//private final AbstractHttpProxy httpProxy;
+	private final ZillowHttpProxy httpProxy;
 	
-	public ZillowDataProvider() {
-		
+	public ZillowDataProvider(ZillowHttpProxy zillowHttpProxy) {
+		httpProxy = zillowHttpProxy;
 	}
 	
-	//	public ZillowDataProvider(AbstractHttpProxy abstractHttpProxy) {
-	//		httpProxy = abstractHttpProxy;
-	//	}
+	public String GetDeepSearchResults() {
+		return httpProxy.doGet("GetDeepSearchResults.htm");
+	}
 	
 }
