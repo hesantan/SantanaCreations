@@ -21,6 +21,7 @@ package santanacommon.serialization.interfaces;
  * @param <T1>  The type to deserialize
  * @param <T2> The resulting type of the deserialization
  */
+@FunctionalInterface
 interface IDeserializer<T1, T2> {
     
     /**

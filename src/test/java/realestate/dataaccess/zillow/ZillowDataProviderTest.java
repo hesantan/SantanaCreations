@@ -27,7 +27,7 @@ import realestate.proxies.zillow.ZillowHttpProxy;
  * @since 10/16/2016
  */
 public class ZillowDataProviderTest {
-	private ZillowDataProvider zillowDataProvider;
+	private final ZillowDataProvider zillowDataProvider;
 	
 	public ZillowDataProviderTest() {
 		ZillowHttpProxy zillowHttpProxy = new ZillowHttpProxy("http://www.zillow.com", "X1-ZWz19rhxouu5fv_4ye7m");

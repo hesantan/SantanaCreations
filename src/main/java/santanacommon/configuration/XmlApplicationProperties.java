@@ -29,31 +29,35 @@ import java.util.logging.Logger;
  * @author Santana Creations
  */
 public class XmlApplicationProperties extends AbstractApplicationProperties {
-	private static final String CONFIG_FILE_DESCRIPTION = "XML Configuration File";
-	private static final String CONFIG_FILENAME = "config.xml";
-	private static final String CONFIG_FILE_ENCODING = "UTF-8";
 	private final Logger log;
-	
+
 	public XmlApplicationProperties() {
-		super(CONFIG_FILE_DESCRIPTION, CONFIG_FILENAME, CONFIG_FILE_ENCODING);
+		super("XML Configuration File", null, null);
+		log = CustomLoggerFactory.getLogger(getClass().getName());
+	}
+
+	public XmlApplicationProperties(String configFile) {
+		super("XML Configuration File", configFile, null);
 		log = CustomLoggerFactory.getLogger(getClass().getName());
 	}
 	
 	@Override
 	public void load() {
-		try (FileInputStream fileInputStream = new FileInputStream(getFilename())) {
+		try {
+			FileInputStream fileInputStream = new FileInputStream(getFilename());
 			properties.loadFromXML(fileInputStream);
 		} catch (IOException ex) {
-			log.log(Level.SEVERE, null, ex);
+			log.log(Level.SEVERE, "XML Configuration could not be loaded.");
 		}
 	}
 	
 	@Override
 	public void commit() {
-		try (FileOutputStream fileOutputStream = new FileOutputStream(getFilename())) {
+		try {
+			FileOutputStream fileOutputStream = new FileOutputStream(getFilename());
 			properties.storeToXML(fileOutputStream, getFileDescription(), getFileEncoding());
 		} catch (IOException ex) {
-			log.log(Level.SEVERE, null, ex);
+			log.log(Level.SEVERE, "XML Configuration could not be saved.");
 		}
 	}
 }

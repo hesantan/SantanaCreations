@@ -31,16 +31,16 @@ public abstract class AbstractApplicationProperties {
 	
 	protected AbstractApplicationProperties(String configFileDescriptionString, String configFilenameString, String configFileEncodingString) {
 		properties = new Properties();
-		
-		if (Strings.isNullOrEmpty(configFileDescription)) {
+
+		if (!Strings.isNullOrEmpty(configFileDescriptionString)) {
 			configFileDescription = configFileDescriptionString;
 		}
-		
-		if (Strings.isNullOrEmpty(configFilename)) {
+
+		if (!Strings.isNullOrEmpty(configFilenameString)) {
 			configFilename = configFilenameString;
 		}
-		
-		if (Strings.isNullOrEmpty(configFileEncoding)) {
+
+		if (!Strings.isNullOrEmpty(configFileEncodingString)) {
 			configFileEncoding = configFileEncodingString;
 		}
 	}

@@ -56,10 +56,17 @@ public class XmlApplicationPropertiesTest {
 	public void load() {
 		xmlApplicationProperties.load();
 	}
+
+	@Test
+	public void testIOExceptions() {
+		XmlApplicationProperties xmlApplicationPropertiesTemp = new XmlApplicationProperties(null);
+		xmlApplicationPropertiesTemp.commit();
+		xmlApplicationPropertiesTemp.load();
+	}
 	
 	@Test
 	public void membersTest() {
-		Assert.assertEquals("Configuration File", xmlApplicationProperties.getFileDescription());
+		Assert.assertEquals("XML Configuration File", xmlApplicationProperties.getFileDescription());
 		Assert.assertEquals("config.xml", xmlApplicationProperties.getFilename());
 		Assert.assertEquals("UTF-8", xmlApplicationProperties.getFileEncoding());
 	}
