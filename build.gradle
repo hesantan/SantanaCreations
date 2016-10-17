@@ -52,7 +52,7 @@ jacocoTestReport {
 		html.destination "${buildDir}/reports/jacoco/jacoco-html"
 		xml.destination "${buildDir}/reports/jacoco/jacoco.xml"
 	}
-	classDirectories = files("classes")
+	//classDirectories = files("classes")
 }
 
 cobertura {
