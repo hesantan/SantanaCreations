@@ -77,8 +77,8 @@ sonarqube {
     }
 }
 
-check.dependsOn jacocoTestReport
-check.dependsOn coberturaCheck
+//check.dependsOn jacocoTestReport
+//check.dependsOn coberturaCheck
 
 //test.finalizedBy(project.tasks.coberturaCheck)
 //test.finalizedBy(project.tasks.jacocoTestReport)
