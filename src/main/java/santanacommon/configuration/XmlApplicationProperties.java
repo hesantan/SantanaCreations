@@ -16,7 +16,7 @@
 package santanacommon.configuration;
 
 import santanacommon.configuration.base.AbstractApplicationProperties;
-import santanacommon.utilities.LoggerFactory;
+import santanacommon.utilities.CustomLoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -36,7 +36,7 @@ public class XmlApplicationProperties extends AbstractApplicationProperties {
 	
 	public XmlApplicationProperties() {
 		super(CONFIG_FILE_DESCRIPTION, CONFIG_FILENAME, CONFIG_FILE_ENCODING);
-		log = LoggerFactory.getLogger(getClass().getName());
+		log = CustomLoggerFactory.getLogger(getClass().getName());
 	}
 	
 	@Override

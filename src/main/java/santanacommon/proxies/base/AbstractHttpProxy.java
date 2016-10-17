@@ -15,7 +15,7 @@
  */
 package santanacommon.proxies.base;
 
-import santanacommon.utilities.LoggerFactory;
+import santanacommon.utilities.CustomLoggerFactory;
 import santanacommon.utilities.Strings;
 
 import java.io.BufferedReader;
@@ -39,7 +39,7 @@ public abstract class AbstractHttpProxy {
 	protected AbstractHttpProxy(String defaultContentType, String acceptCharset) {
 		this.acceptCharset = acceptCharset;
 		this.defaultContentType = defaultContentType;
-		log = LoggerFactory.getLogger(getClass().getName());
+		log = CustomLoggerFactory.getLogger(getClass().getName());
 	}
 	
 	public String doGet(String uri) {

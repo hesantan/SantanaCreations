@@ -8,7 +8,8 @@ env:
   - secure: BZozBvVkXixzCPbRQfUOsFIItXTK4Fn12sEHsA0tZIE/c5WomMPoBUYpSu68J+bgCklewyOX42EDizcjGbShxDEs90OABcfPSMAcbYruh4/CzMPd7x4/cvj4C8T4PCHlQfffvmZYNW1pbTwJ6ZNN1yM9uDU2ZpAykNqj5ph3Zlm4/ReyE6X2Yv4/mQuQFIQr0jPQl5RW+AAkdoGDd/qiXXxeVIxK+xIc/X2H8iQ1IzY331++5eb3vCNZ4BHH8HoqHvgT8NERoWZE0PtvVbhllSRAcNq2VX3T/KoMOuaKro2YWTp6xh1zpz99jOoKoqjUOk/GtkgTUModOPR8PCCzo9ytIGqcraIHq3oF0niYJMj0d439NtHCQrDML8m2EzfTjCAYbLgLj7rvD1c+qsB6xpfZg5vFQnhP0yxUZ3c1+e1UwscGs9yYdjCSPlTbl/tMs4WL3xoruTbaeQF6T/F/DE8LcX/7x5roQuX784VnD8gKISLzaUKJ5hOeoZKQ62gBUg1sHRNIedZXCMHqtGLXeXWD4cH8RHPE/hAKcNyyZcFi+Kne8b2ecVO+Fb5UPdFACAI8QXrUWjeg0PeWR9IqKOiH037q3kLyY01fl90MfF2e7FHvkGM3gWpq3XvV+4LDTtxUyUFrXlI9pB9YMmU356DDN9AQp0gdMSJes/CnPmc=
 script: gradle clean build
 after_success:
-- gradle jacoco cobertura coveralls
+- gradle jacoco coveralls
+- gradle cobertura coveralls
 - bash <(curl -s https://codecov.io/bash)
 - sonar-scanner -Dsonar.login=$SONAR_TOKEN
 notifications:

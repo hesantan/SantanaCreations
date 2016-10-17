@@ -25,9 +25,9 @@ import java.util.logging.Logger;
  * @author Hector
  * @since 10/16/2016
  */
-public class LoggerFactory {
-	
-	private LoggerFactory() {
+public class CustomLoggerFactory {
+
+	private CustomLoggerFactory() {
 		
 	}
 	

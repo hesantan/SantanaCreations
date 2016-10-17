@@ -20,7 +20,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import santanacommon.utilities.LoggerFactory;
+import santanacommon.utilities.CustomLoggerFactory;
 
 import java.io.File;
 import java.util.logging.Logger;
@@ -48,7 +48,7 @@ public class XmlApplicationPropertiesTest {
 	public void cleanUp() {
 		File configFile = new File(xmlApplicationProperties.getFilename());
 		boolean deleted = configFile.delete();
-		Logger log = LoggerFactory.getLogger(XmlApplicationProperties.class.getName());
+		Logger log = CustomLoggerFactory.getLogger(XmlApplicationProperties.class.getName());
 		log.info("Test Config file was " + (deleted ? "" : "not ") + "deleted");
 	}
 	

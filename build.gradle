@@ -7,12 +7,14 @@ plugins {
 	id "org.sonarqube" version "2.1"
 }
 
-group = 'santanacreations'
+group = 'SantanaCreations'
 version = '1.0'
 description = """Common library code"""
 
-sourceCompatibility = '1.7'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 
 if (!hasProperty('mainClass')) {
     ext.mainClass = ''
@@ -28,26 +30,35 @@ dependencies {
 }
 
 test {
-    filter {
+	group = "Reporting"
+	description = "Generates test reports for unit tests"
+
+	filter {
         includeTestsMatching "*Test"
     }
-	ignoreFailures = true
-
 	jacoco {
 		classDumpFile = file("$buildDir/jacoco/classpathdumps")
 	}
+	ignoreFailures = true
 }
 
 jacocoTestReport {
+	group = "Reporting"
+	description = "Generates Jacoco coverage reports for unit tests"
+
 	reports {
 		html.enabled = true
 		xml.enabled = true
 		html.destination "${buildDir}/reports/jacoco/jacoco-html"
-		xml.destination "${buildDir}/reports/jacoco/jacoco-xml"
+		xml.destination "${buildDir}/reports/jacoco/jacoco.xml"
 	}
+	classDirectories = files("classes")
 }
 
 cobertura {
+	group = "Reporting"
+	description = "Generates Cobertura coverage reports for unit tests"
+
 	coverageFormats = ['html', 'xml']
 	coverageReportDir = file("$buildDir/reports/cobertura")
 	coverageIgnoreTrivial = true

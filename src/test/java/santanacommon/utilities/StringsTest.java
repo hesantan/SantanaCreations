@@ -46,7 +46,7 @@ public class StringsTest {
 			String encodedString = Strings.urlEncode(decodedString);
 			Assert.assertEquals(Strings.urlDecode(encodedString), decodedString);
 		} catch (UnsupportedEncodingException ex) {
-			Logger log = LoggerFactory.getLogger(StringsTest.class.getName());
+			Logger log = CustomLoggerFactory.getLogger(StringsTest.class.getName());
 			log.log(Level.SEVERE, null, ex);
 		}
 	}
