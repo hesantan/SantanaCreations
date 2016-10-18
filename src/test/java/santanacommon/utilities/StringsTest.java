@@ -20,10 +20,6 @@ package santanacommon.utilities;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.UnsupportedEncodingException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * Test class for String utilities
  *
@@ -38,16 +34,16 @@ public class StringsTest {
 		Assert.assertTrue(Strings.isNullOrEmpty(null));
 		Assert.assertFalse(Strings.isNullOrEmpty("Test String"));
 	}
-	
+
 	@Test
 	public void urlEncoding() {
-		try {
-			String decodedString = " The Test String +!#$%&'()*+,-./ ";
-			String encodedString = Strings.urlEncode(decodedString);
-			Assert.assertEquals(Strings.urlDecode(encodedString), decodedString);
-		} catch (UnsupportedEncodingException ex) {
-			Logger log = CustomLoggerFactory.getLogger(StringsTest.class.getName());
-			log.log(Level.SEVERE, null, ex);
-		}
+		String decodedString = " The Test String +!#$%&'()*+,-./ ";
+		String encodedString = Strings.urlEncode(decodedString);
+		Assert.assertEquals(Strings.urlDecode(encodedString), decodedString);
+	}
+
+	@Test(expected = AssertionError.class)
+	public void unsupportedEncodingExceptionTest() {
+		Assert.assertEquals(Strings.urlDecode("", ""), Strings.urlDecode("", ""));
 	}
 }

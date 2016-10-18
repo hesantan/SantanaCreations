@@ -20,5 +20,7 @@ package realestate.datatransferobjects;
  * @author Santana Creations
  */
 public class ZillowWebServiceResponse {
-	
+	public ZillowResponseRequest request = null;
+	public ZillowResponseMessage message = null;
+	public ZillowResponseBody body = null;
 }

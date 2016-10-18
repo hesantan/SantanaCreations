@@ -15,10 +15,22 @@
  */
 package realestate.entities.zillow;
 
+import java.util.Date;
+
 /**
  *
  * @author Hector
  */
 public class ZillowPropertyReport {
-    
+	public long zPid = 0;
+	public int taxAssessmentYear = 0;
+	public double taxAssessment = 0.0;
+	public int yearBuilt = 0;
+	public int lotSizeSquareFeet = 0;
+	public int finishedSquareFeet = 0;
+	public double bathrooms = 0.0;
+	public int bedrooms = 0;
+	public Date lastSoldDate = null;
+	public long lastSoldPrice = 0;
+	public String lastSoldPriceCurrency = "";
 }

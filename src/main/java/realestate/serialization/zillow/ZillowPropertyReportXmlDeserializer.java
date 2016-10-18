@@ -20,6 +20,8 @@ import org.w3c.dom.Document;
 import realestate.entities.zillow.ZillowPropertyReport;
 import santanacommon.serialization.interfaces.IXmlDeserializer;
 
+import java.util.Date;
+
 /**
  *
  * @author Hector
@@ -28,7 +30,21 @@ public class ZillowPropertyReportXmlDeserializer implements IXmlDeserializer<Zil
 
     @Override
     public ZillowPropertyReport deserialize(Document xmlDocument) {
-        return new ZillowPropertyReport();
+	    return new ZillowPropertyReport() {
+		    {
+			    zPid = 12345678;
+			    taxAssessmentYear = 2015;
+			    taxAssessment = 1234567.0;
+			    yearBuilt = 1990;
+			    lotSizeSquareFeet = 1234;
+			    finishedSquareFeet = 5678;
+			    bathrooms = 1.2;
+			    bedrooms = 4;
+			    lastSoldDate = new Date();
+			    lastSoldPrice = 125000;
+			    lastSoldPriceCurrency = "USD";
+		    }
+	    };
     }
     
 }

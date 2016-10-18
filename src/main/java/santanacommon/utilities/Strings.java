@@ -18,26 +18,51 @@ package santanacommon.utilities;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Santana Creations
  */
-public class Strings {
-	
-	private Strings() {
-		
-	}
-	
+public enum Strings {
+	;
+
+	private static final String DEFAULT_URL_ENCODING = "UTF-8";
+
     public static boolean isNullOrEmpty(String str) {
 	    return str == null || str.isEmpty();
     }
-	
-	static String urlEncode(String str) throws UnsupportedEncodingException {
-		return URLEncoder.encode(str, "UTF-8");
+
+	public static String urlEncode(String str) {
+		return urlEncode(str, DEFAULT_URL_ENCODING);
 	}
-	
-	static String urlDecode(String str) throws UnsupportedEncodingException {
-		return URLDecoder.decode(str, "UTF-8");
+
+	public static String urlDecode(String str) {
+		return urlDecode(str, DEFAULT_URL_ENCODING);
+	}
+
+	public static String urlEncode(String str, String encoding) {
+		try {
+			return URLEncoder.encode(str, encoding);
+		} catch (UnsupportedEncodingException e) {
+
+			Logger log = CustomLoggerFactory.getLogger(Strings.class.getName());
+			log.log(Level.FINE, "URL could not be " + encoding + " encoded", e);
+
+			throw new AssertionError("UTF-8 not supported");
+		}
+	}
+
+	public static String urlDecode(String str, String encoding) {
+		try {
+			return URLDecoder.decode(str, encoding);
+		} catch (UnsupportedEncodingException e) {
+
+			Logger log = CustomLoggerFactory.getLogger(Strings.class.getName());
+			log.log(Level.FINE, "URL could not be " + encoding + " decoded", e);
+
+			throw new AssertionError("UTF-8 not supported");
+		}
 	}
 }

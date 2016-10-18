@@ -31,7 +31,11 @@ import java.util.logging.Logger;
  * @author Santana Creations
  */
 public abstract class AbstractHttpProxy {
+	private static final String GET_METHOD_NAME = "GET";
+	private static final String POST_METHOD_NAME = "POST";
+	private static final String PUT_METHOD_NAME = "PUT";
 	private static final String DELETE_METHOD_NAME = "DELETE";
+
 	private final String acceptCharset;
 	private final String defaultContentType;
 	private final Logger log;
@@ -43,15 +47,15 @@ public abstract class AbstractHttpProxy {
 	}
 	
 	public String doGet(String uri) {
-		return sendHttpRequest("GET", buildUrl(uri), null);
+		return sendHttpRequest(GET_METHOD_NAME, buildUrl(uri), null);
 	}
     
 	public String doPost(String uri, String data) {
-		return sendHttpRequest("POST", buildUrl(uri), data);
+		return sendHttpRequest(POST_METHOD_NAME, buildUrl(uri), data);
 	}
     
 	public String doPut(String uri, String data) {
-		return sendHttpRequest("PUT", buildUrl(uri), data);
+		return sendHttpRequest(PUT_METHOD_NAME, buildUrl(uri), data);
 	}
 	
 	public String doDelete(String uri, String data) {
@@ -75,29 +79,29 @@ public abstract class AbstractHttpProxy {
 	protected abstract Map<String, String> getRequestHeadersForDelete();
 	
 	protected abstract String buildUrl(String uri);
-	
-	private String getContentType(String method) {
-		switch(method.toUpperCase()) {
-			case "GET":
+
+	protected String getContentType(String method) {
+		switch (method) {
+			case GET_METHOD_NAME:
 				return getRequestContentTypeForGet();
-			case "POST":
+			case POST_METHOD_NAME:
 				return getRequestContentTypeForPost();
-			case "PUT":
+			case PUT_METHOD_NAME:
 				return getRequestContentTypeForPut();
 			case DELETE_METHOD_NAME:
 				return getRequestContentTypeForDelete();
 			default:
-				return defaultContentType;
+				return null;
 		}
 	}
-	
-	private Map<String, String> getHeaders(String method) {
-		switch(method.toUpperCase()) {
-			case "GET":
+
+	protected Map<String, String> getHeaders(String method) {
+		switch (method) {
+			case GET_METHOD_NAME:
 				return getRequestHeadersForGet();
-			case "POST":
+			case POST_METHOD_NAME:
 				return getRequestHeadersForPost();
-			case "PUT":
+			case PUT_METHOD_NAME:
 				return getRequestHeadersForPut();
 			case DELETE_METHOD_NAME:
 				return getRequestHeadersForDelete();
@@ -105,8 +109,8 @@ public abstract class AbstractHttpProxy {
 				return null;
 		}
 	}
-	
-	private String sendHttpRequest(String method, String url, String data) {
+
+	protected String sendHttpRequest(String method, String url, String data) {
 		String contentType = getContentType(method);
 		Map<String, String> headers = getHeaders(method);
 		return sendHttpRequest(method, headers, contentType, url, data);
@@ -132,11 +136,11 @@ public abstract class AbstractHttpProxy {
 					urlConnection.setRequestProperty(entry.getKey(), entry.getValue());
 				}
 			}
-			
-            int responseCode = urlConnection.getResponseCode();
-            
-            log.log(Level.INFO, "Sending \"{0}\" request to URL : {1}", new Object[]{method, url});
-            log.log(Level.INFO, "Response Code : {0}", responseCode);
+
+			//int responseCode = urlConnection.getResponseCode();
+
+			//log.log(Level.INFO, "Sending \"{0}\" request to URL : {1}", new Object[]{method, url});
+			//log.log(Level.INFO, "Response Code : {0}", responseCode);
 			
 			StringBuilder response;
 			
@@ -153,8 +157,8 @@ public abstract class AbstractHttpProxy {
 			
 			return response.toString();
 		} catch (Exception ex) {
-			log.log(Level.SEVERE, null, ex);
-        }
-        return "";
+			log.log(Level.FINE, null, ex);
+		}
+		return "";
 	}
 }

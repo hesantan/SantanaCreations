@@ -26,11 +26,12 @@ import java.util.Map;
  */
 public class ZillowHttpProxy extends AbstractHttpProxy {
 
+	private static final String DEFAULT_CONTENT_TYPE = "text/xml";
 	private final String baseUrl;
 	private final String apiKey;
 
 	public ZillowHttpProxy(String baseUrlString, String apiKeyString) {
-		super("text/xml", "UTF-8");
+		super(DEFAULT_CONTENT_TYPE, "UTF-8");
 		baseUrl = baseUrlString;
 		apiKey = apiKeyString;
 	}
@@ -52,7 +53,7 @@ public class ZillowHttpProxy extends AbstractHttpProxy {
 	// GET
 	@Override
 	protected String getRequestContentTypeForGet() {
-		return null;
+		return DEFAULT_CONTENT_TYPE;
 	}
 
 	@Override

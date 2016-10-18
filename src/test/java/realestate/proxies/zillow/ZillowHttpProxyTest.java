@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package realstate.proxies.zillow;
+package realestate.proxies.zillow;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import realestate.proxies.zillow.ZillowHttpProxy;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -82,6 +81,19 @@ public class ZillowHttpProxyTest {
 		String responseString = zillowHttpProxy.doPost(null, null);
 		Assert.assertEquals(responseString, "");
 	}
+
+	@Test
+	public void doEmptyPostTest() {
+		String responseString = zillowHttpProxy.doPost("", "");
+		Assert.assertEquals(responseString, "");
+	}
+
+	@Test
+	public void doNullPostTest() {
+		String serviceUri = "GetDeepSearchResults.htm?address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA";
+		String responseString = zillowHttpProxy.doPost(serviceUri, "Data");
+		Assert.assertNotEquals(responseString, "");
+	}
 	
 	@Test
 	public void doPutTest() {
@@ -93,5 +105,13 @@ public class ZillowHttpProxyTest {
 	public void doDeleteTest() {
 		String responseString = zillowHttpProxy.doDelete(null, null);
 		Assert.assertEquals(responseString, "");
+	}
+
+	@Test
+	public void doRequestContentTypeTest() {
+		Assert.assertEquals(zillowHttpProxy.getRequestContentTypeForGet(), "text/xml");
+		Assert.assertEquals(zillowHttpProxy.getRequestContentTypeForPost(), null);
+		Assert.assertEquals(zillowHttpProxy.getRequestContentTypeForPut(), null);
+		Assert.assertEquals(zillowHttpProxy.getRequestContentTypeForDelete(), null);
 	}
 }

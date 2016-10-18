@@ -25,12 +25,9 @@ import java.util.logging.Logger;
  * @author Hector
  * @since 10/16/2016
  */
-public class CustomLoggerFactory {
+public enum CustomLoggerFactory {
+	;
 
-	private CustomLoggerFactory() {
-		
-	}
-	
 	public static Logger getLogger(String loggerName) {
 		Logger log = Logger.getLogger(loggerName);
 		log.setLevel(Level.INFO);

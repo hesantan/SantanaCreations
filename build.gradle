@@ -52,7 +52,6 @@ jacocoTestReport {
 		html.destination "${buildDir}/reports/jacoco/jacoco-html"
 		xml.destination "${buildDir}/reports/jacoco/jacoco.xml"
 	}
-	//classDirectories = files("classes")
 }
 
 cobertura {
@@ -76,11 +75,3 @@ sonarqube {
 		property "sonar.java.test.libraries", dependencyCacheDir.getPath()
     }
 }
-
-//check.dependsOn jacocoTestReport
-//check.dependsOn coberturaCheck
-
-//test.finalizedBy(project.tasks.coberturaCheck)
-//test.finalizedBy(project.tasks.jacocoTestReport)
-//test.finalizedBy(project.tasks.sonarqube)
-

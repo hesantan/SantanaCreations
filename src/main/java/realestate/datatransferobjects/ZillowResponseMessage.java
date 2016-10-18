@@ -20,5 +20,6 @@ package realestate.datatransferobjects;
  * @author Santana Creations
  */
 public class ZillowResponseMessage {
-    
+	public String text = "";
+	public int code = 0;
 }

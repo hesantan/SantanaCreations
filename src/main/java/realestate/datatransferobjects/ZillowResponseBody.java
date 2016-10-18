@@ -15,10 +15,15 @@
  */
 package realestate.datatransferobjects;
 
+import realestate.entities.zillow.ZillowPropertyReport;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Santana Creations
  */
 public class ZillowResponseBody {
-	
+	public List<ZillowPropertyReport> results = new ArrayList<>();
 }
