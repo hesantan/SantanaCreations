@@ -33,7 +33,7 @@ public class ZillowPropertyReportXmlDeserializerTest {
 	}
 
 	@Test
-	public void deserialize() throws Exception {
+	public void deserialize() {
 		zillowPropertyReportXmlDeserializer.deserialize(null);
 	}
 

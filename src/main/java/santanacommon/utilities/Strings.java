@@ -25,10 +25,13 @@ import java.util.logging.Logger;
  *
  * @author Santana Creations
  */
-public enum Strings {
-	;
+public class Strings {
 
 	private static final String DEFAULT_URL_ENCODING = "UTF-8";
+
+	private Strings() {
+
+	}
 
     public static boolean isNullOrEmpty(String str) {
 	    return str == null || str.isEmpty();
