@@ -20,10 +20,8 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import santanacommon.utilities.CustomLoggerFactory;
 
 import java.io.File;
-import java.util.logging.Logger;
 
 /**
  * XML Configuration file tester
@@ -45,29 +43,31 @@ public class XmlApplicationPropertiesTest {
 	}
 	
 	@After
-	public void cleanUp() {
-		File configFile = new File(xmlApplicationProperties.getFilename());
-		boolean deleted = configFile.delete();
-		Logger log = CustomLoggerFactory.getLogger(XmlApplicationProperties.class.getName());
-		log.info("Test Config file was " + (deleted ? "" : "not ") + "deleted");
+	public void tearDown() {
+		deleteConfigFile(xmlApplicationProperties.getFilename());
 	}
-	
+
+	@Test
+	public void membersTest() {
+		Assert.assertEquals("XML Configuration File", xmlApplicationProperties.getFileDescription());
+		Assert.assertEquals("config.xml", xmlApplicationProperties.getFilename());
+		Assert.assertEquals("UTF-8", xmlApplicationProperties.getFileEncoding());
+	}
+
 	@Test
 	public void load() {
 		xmlApplicationProperties.load();
 	}
 
 	@Test
-	public void testIOExceptions() {
-		XmlApplicationProperties xmlApplicationPropertiesTemp = new XmlApplicationProperties(null);
+	public void testFileNotFoundException() {
+		XmlApplicationProperties xmlApplicationPropertiesTemp = new XmlApplicationProperties("");
 		xmlApplicationPropertiesTemp.commit();
 		xmlApplicationPropertiesTemp.load();
 	}
-	
-	@Test
-	public void membersTest() {
-		Assert.assertEquals("XML Configuration File", xmlApplicationProperties.getFileDescription());
-		Assert.assertEquals("config.xml", xmlApplicationProperties.getFilename());
-		Assert.assertEquals("UTF-8", xmlApplicationProperties.getFileEncoding());
+
+	private void deleteConfigFile(String configFilePath) {
+		File configFile = new File(configFilePath);
+		configFile.delete()
 	}
 }

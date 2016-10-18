@@ -5,3 +5,4 @@ build/
 .gradle/
 src/main/groovy/
 src/test/groovy/
+config.xml

@@ -28,16 +28,17 @@ import java.util.logging.Logger;
  *
  * @author Santana Creations
  */
-public class XmlApplicationProperties extends AbstractApplicationProperties {
+class XmlApplicationProperties extends AbstractApplicationProperties {
+
 	private final Logger log;
 
-	public XmlApplicationProperties() {
-		super("XML Configuration File", null, null);
+	XmlApplicationProperties() {
+		super("XML Configuration File", "config.xml", "UTF-8");
 		log = CustomLoggerFactory.getLogger(getClass().getName());
 	}
 
-	public XmlApplicationProperties(String configFile) {
-		super("XML Configuration File", configFile, null);
+	XmlApplicationProperties(String configFile) {
+		super("XML Configuration File", configFile, "UTF-8");
 		log = CustomLoggerFactory.getLogger(getClass().getName());
 	}
 	
@@ -47,7 +48,7 @@ public class XmlApplicationProperties extends AbstractApplicationProperties {
 			FileInputStream fileInputStream = new FileInputStream(getFilename());
 			properties.loadFromXML(fileInputStream);
 		} catch (IOException ex) {
-			log.log(Level.SEVERE, "XML Configuration could not be loaded.");
+			log.log(Level.SEVERE, "XML Configuration could not be loaded.", ex);
 		}
 	}
 	
@@ -57,7 +58,7 @@ public class XmlApplicationProperties extends AbstractApplicationProperties {
 			FileOutputStream fileOutputStream = new FileOutputStream(getFilename());
 			properties.storeToXML(fileOutputStream, getFileDescription(), getFileEncoding());
 		} catch (IOException ex) {
-			log.log(Level.SEVERE, "XML Configuration could not be saved.");
+			log.log(Level.SEVERE, "XML Configuration could not be saved.", ex);
 		}
 	}
 }

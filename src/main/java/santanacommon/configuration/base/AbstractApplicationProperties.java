@@ -15,34 +15,21 @@
  */
 package santanacommon.configuration.base;
 
-import santanacommon.utilities.Strings;
-
 import java.util.Properties;
 
-/**
- *
- * @author Santana Creations
- */
 public abstract class AbstractApplicationProperties {
-	private static String configFilename = "config.xml";
-	private static String configFileDescription = "Configuration File";
-	private static String configFileEncoding = "UTF-8";
+
 	protected final Properties properties;
+	private final String configFilename;
+	private final String configFileDescription;
+	private final String configFileEncoding;
 	
 	protected AbstractApplicationProperties(String configFileDescriptionString, String configFilenameString, String configFileEncodingString) {
 		properties = new Properties();
 
-		if (!Strings.isNullOrEmpty(configFileDescriptionString)) {
-			configFileDescription = configFileDescriptionString;
-		}
-
-		if (!Strings.isNullOrEmpty(configFilenameString)) {
-			configFilename = configFilenameString;
-		}
-
-		if (!Strings.isNullOrEmpty(configFileEncodingString)) {
-			configFileEncoding = configFileEncodingString;
-		}
+		configFileDescription = configFileDescriptionString;
+		configFilename = configFilenameString;
+		configFileEncoding = configFileEncodingString;
 	}
 	
 	public String getFileDescription() {
