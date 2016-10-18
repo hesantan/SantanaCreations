@@ -38,10 +38,7 @@ public class ZillowWebServiceResponseTest {
 	public void initTest() {
 		zillowWebServiceResponse.request = new ZillowResponseRequest();
 		zillowWebServiceResponse.message = new ZillowResponseMessage();
-		zillowWebServiceResponse.body = new ZillowResponseBody() {
-			{
-				results = new ArrayList<>();
-			}
-		};
+		zillowWebServiceResponse.body = new ZillowResponseBody();
+		zillowWebServiceResponse.body.results = new ArrayList<>();
 	}
 }

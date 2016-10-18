@@ -30,21 +30,20 @@ public class ZillowPropertyReportXmlDeserializer implements IXmlDeserializer<Zil
 
     @Override
     public ZillowPropertyReport deserialize(Document xmlDocument) {
-	    return new ZillowPropertyReport() {
-		    {
-			    zPid = 12345678;
-			    taxAssessmentYear = 2015;
-			    taxAssessment = 1234567.0;
-			    yearBuilt = 1990;
-			    lotSizeSquareFeet = 1234;
-			    finishedSquareFeet = 5678;
-			    bathrooms = 1.2;
-			    bedrooms = 4;
-			    lastSoldDate = new Date();
-			    lastSoldPrice = 125000;
-			    lastSoldPriceCurrency = "USD";
-		    }
-	    };
+	    ZillowPropertyReport zillowPropertyReport = new ZillowPropertyReport();
+	    zillowPropertyReport.zPid = 12345678;
+	    zillowPropertyReport.taxAssessmentYear = 2015;
+	    zillowPropertyReport.taxAssessment = 1234567.0;
+	    zillowPropertyReport.yearBuilt = 1990;
+	    zillowPropertyReport.lotSizeSquareFeet = 1234;
+	    zillowPropertyReport.finishedSquareFeet = 5678;
+	    zillowPropertyReport.bathrooms = 1.2;
+	    zillowPropertyReport.bedrooms = 4;
+	    zillowPropertyReport.lastSoldDate = new Date();
+	    zillowPropertyReport.lastSoldPrice = 125000;
+	    zillowPropertyReport.lastSoldPriceCurrency = "USD";
+
+	    return zillowPropertyReport;
     }
     
 }

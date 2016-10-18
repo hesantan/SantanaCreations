@@ -43,7 +43,12 @@ public class StringsTest {
 	}
 
 	@Test(expected = AssertionError.class)
-	public void unsupportedEncodingExceptionTest() {
+	public void decodeUnsupportedEncodingExceptionTest() {
 		Assert.assertEquals(Strings.urlDecode("", ""), Strings.urlDecode("", ""));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void encodeUnsupportedEncodingExceptionTest() {
+		Assert.assertEquals(Strings.urlEncode("", ""), Strings.urlEncode("", ""));
 	}
 }

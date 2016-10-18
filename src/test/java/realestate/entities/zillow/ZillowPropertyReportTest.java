@@ -17,6 +17,7 @@
 package realestate.entities.zillow;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Date;
@@ -32,40 +33,38 @@ public class ZillowPropertyReportTest {
 	private ZillowPropertyReport zillowPropertyReport;
 
 	public ZillowPropertyReportTest() {
-		zillowPropertyReport = new ZillowPropertyReport() {
-			{
-				zPid = 12345678;
-				taxAssessmentYear = 2015;
-				taxAssessment = 1234567.0;
-				yearBuilt = 1990;
-				lotSizeSquareFeet = 1234;
-				finishedSquareFeet = 5678;
-				bathrooms = 1.2;
-				bedrooms = 4;
-				lastSoldDate = new Date();
-				lastSoldPrice = 125000;
-				lastSoldPriceCurrency = "USD";
-			}
-		};
+		zillowPropertyReport = new ZillowPropertyReport();
+	}
+
+	@Before
+	public void setUp() {
+		zillowPropertyReport.zPid = 12345678;
+		zillowPropertyReport.taxAssessmentYear = 2015;
+		zillowPropertyReport.taxAssessment = 1234567.0;
+		zillowPropertyReport.yearBuilt = 1990;
+		zillowPropertyReport.lotSizeSquareFeet = 1234;
+		zillowPropertyReport.finishedSquareFeet = 5678;
+		zillowPropertyReport.bathrooms = 1.2;
+		zillowPropertyReport.bedrooms = 4;
+		zillowPropertyReport.lastSoldDate = new Date();
+		zillowPropertyReport.lastSoldPrice = 125000;
+		zillowPropertyReport.lastSoldPriceCurrency = "USD";
 	}
 
 	@Test
 	public void initTest() {
-		ZillowPropertyReport zillowPropertyReport2 = new ZillowPropertyReport() {
-			{
-				zPid = 12345678;
-				taxAssessmentYear = 2015;
-				taxAssessment = 1234567.0;
-				yearBuilt = 1990;
-				lotSizeSquareFeet = 1234;
-				finishedSquareFeet = 5678;
-				bathrooms = 1.2;
-				bedrooms = 4;
-				lastSoldDate = new Date();
-				lastSoldPrice = 125000;
-				lastSoldPriceCurrency = "USD";
-			}
-		};
+		ZillowPropertyReport zillowPropertyReport2 = new ZillowPropertyReport();
+		zillowPropertyReport2.zPid = 12345678;
+		zillowPropertyReport2.taxAssessmentYear = 2015;
+		zillowPropertyReport2.taxAssessment = 1234567.0;
+		zillowPropertyReport2.yearBuilt = 1990;
+		zillowPropertyReport2.lotSizeSquareFeet = 1234;
+		zillowPropertyReport2.finishedSquareFeet = 5678;
+		zillowPropertyReport2.bathrooms = 1.2;
+		zillowPropertyReport2.bedrooms = 4;
+		zillowPropertyReport2.lastSoldDate = new Date();
+		zillowPropertyReport2.lastSoldPrice = 125000;
+		zillowPropertyReport2.lastSoldPriceCurrency = "USD";
 
 		Assert.assertEquals(zillowPropertyReport.zPid, zillowPropertyReport2.zPid);
 	}
