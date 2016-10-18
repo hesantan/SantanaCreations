@@ -20,8 +20,10 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import santanacommon.utilities.CustomLoggerFactory;
 
 import java.io.File;
+import java.util.logging.Logger;
 
 /**
  * XML Configuration file tester
@@ -68,6 +70,11 @@ public class XmlApplicationPropertiesTest {
 
 	private void deleteConfigFile(String configFilePath) {
 		File configFile = new File(configFilePath);
-		configFile.delete()
+		final boolean deleted = configFile.delete();
+
+		if (!deleted) {
+			Logger log = CustomLoggerFactory.getLogger(getClass().getName());
+			log.info("'" + configFilePath + "' could not be deleted.");
+		}
 	}
 }
