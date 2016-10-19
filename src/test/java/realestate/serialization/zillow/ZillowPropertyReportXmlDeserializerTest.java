@@ -16,6 +16,7 @@
 
 package realestate.serialization.zillow;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -33,8 +34,8 @@ public class ZillowPropertyReportXmlDeserializerTest {
 	}
 
 	@Test
-	public void deserialize() {
-		zillowPropertyReportXmlDeserializer.deserialize(null);
+	public void deserializeTest() {
+		Assert.assertNotNull(zillowPropertyReportXmlDeserializer.deserialize(null));
 	}
 
 }

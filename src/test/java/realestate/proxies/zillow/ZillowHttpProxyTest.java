@@ -100,10 +100,22 @@ public class ZillowHttpProxyTest {
 		String responseString = zillowHttpProxy.doPut(null, null);
 		Assert.assertEquals(responseString, "");
 	}
+
+	@Test
+	public void doEmptyPutTest() {
+		String responseString = zillowHttpProxy.doPut("", "");
+		Assert.assertEquals(responseString, "");
+	}
 	
 	@Test
 	public void doDeleteTest() {
 		String responseString = zillowHttpProxy.doDelete(null, null);
+		Assert.assertEquals(responseString, "");
+	}
+
+	@Test
+	public void doEmptyDeleteTest() {
+		String responseString = zillowHttpProxy.doDelete("", "");
 		Assert.assertEquals(responseString, "");
 	}
 
@@ -113,5 +125,12 @@ public class ZillowHttpProxyTest {
 		Assert.assertEquals(zillowHttpProxy.getRequestContentTypeForPost(), null);
 		Assert.assertEquals(zillowHttpProxy.getRequestContentTypeForPut(), null);
 		Assert.assertEquals(zillowHttpProxy.getRequestContentTypeForDelete(), null);
+	}
+
+	@Test
+	public void doExceptionTest() {
+		String serviceUri = "\\/\\/\\/\\";
+		String responseString = zillowHttpProxy.doPost(serviceUri, serviceUri);
+		Assert.assertEquals(responseString, "");
 	}
 }

@@ -18,6 +18,8 @@ package realestate.proxies.zillow;
 import santanacommon.proxies.base.AbstractHttpProxy;
 import santanacommon.utilities.Strings;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -58,7 +60,9 @@ public class ZillowHttpProxy extends AbstractHttpProxy {
 
 	@Override
 	protected Map<String, String> getRequestHeadersForGet() {
-		return null;
+		Map<String, String> headers = new HashMap<>();
+		headers.put("Date", new Date().toString());
+		return headers;
 	}
 
 	// POST
@@ -69,7 +73,7 @@ public class ZillowHttpProxy extends AbstractHttpProxy {
 
 	@Override
 	protected Map<String, String> getRequestHeadersForPost() {
-		return null;
+		return new HashMap<>();
 	}
 
 	// PUT

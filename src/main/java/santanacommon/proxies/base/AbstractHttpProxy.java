@@ -19,7 +19,9 @@ import santanacommon.utilities.CustomLoggerFactory;
 import santanacommon.utilities.Strings;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
@@ -81,6 +83,7 @@ public abstract class AbstractHttpProxy {
 	protected abstract String buildUrl(String uri);
 
 	protected String getContentType(String method) {
+
 		switch (method) {
 			case GET_METHOD_NAME:
 				return getRequestContentTypeForGet();
@@ -90,12 +93,13 @@ public abstract class AbstractHttpProxy {
 				return getRequestContentTypeForPut();
 			case DELETE_METHOD_NAME:
 				return getRequestContentTypeForDelete();
-			default:
-				return null;
 		}
+
+		return null;
 	}
 
 	protected Map<String, String> getHeaders(String method) {
+
 		switch (method) {
 			case GET_METHOD_NAME:
 				return getRequestHeadersForGet();
@@ -105,9 +109,9 @@ public abstract class AbstractHttpProxy {
 				return getRequestHeadersForPut();
 			case DELETE_METHOD_NAME:
 				return getRequestHeadersForDelete();
-			default:
-				return null;
 		}
+
+		return null;
 	}
 
 	protected String sendHttpRequest(String method, String url, String data) {
@@ -125,9 +129,11 @@ public abstract class AbstractHttpProxy {
 		try {
             URL urlObject = new URL(url);
             HttpURLConnection urlConnection = (HttpURLConnection) urlObject.openConnection();
-			
-            urlConnection.setDoOutput(!Strings.isNullOrEmpty(data));
-            urlConnection.setRequestMethod(method);
+
+			boolean hasData = !Strings.isNullOrEmpty(data);
+			urlConnection.setDoOutput(hasData);
+			urlConnection.setDoInput(true);
+			urlConnection.setRequestMethod(method);
 			urlConnection.setRequestProperty("Accept-Charset", acceptCharset);
 			urlConnection.setRequestProperty("Content-Type", Strings.isNullOrEmpty(contentType) ? defaultContentType : contentType);
 			
@@ -137,6 +143,18 @@ public abstract class AbstractHttpProxy {
 				}
 			}
 
+			if (hasData) {
+				try (BufferedWriter out = new BufferedWriter(
+						new OutputStreamWriter(urlConnection.getOutputStream(), acceptCharset))) {
+					out.write(data);
+					out.flush();
+					out.close();
+				} finally {
+					urlConnection.getOutputStream().close();
+				}
+			}
+
+			urlConnection.connect();
 			int responseCode = urlConnection.getResponseCode();
 
 			log.log(Level.FINE, "Sending \"{0}\" request to URL : {1}", new Object[]{method, url});
@@ -152,8 +170,9 @@ public abstract class AbstractHttpProxy {
 					response.append(inputLine);
                 }
             } finally {
-                urlConnection.disconnect();
-            }
+				urlConnection.getInputStream().close();
+				urlConnection.disconnect();
+			}
 			
 			return response.toString();
 		} catch (Exception ex) {
