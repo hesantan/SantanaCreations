@@ -16,6 +16,7 @@
 
 package realestate.datatransferobjects;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -35,10 +36,43 @@ public class ZillowWebServiceResponseTest {
 	}
 
 	@Test
-	public void initTest() {
-		zillowWebServiceResponse.request = new ZillowResponseRequest();
-		zillowWebServiceResponse.message = new ZillowResponseMessage();
-		zillowWebServiceResponse.body = new ZillowResponseBody();
-		zillowWebServiceResponse.body.results = new ArrayList<>();
+	public void membersTest() {
+		Assert.assertNull(zillowWebServiceResponse.getRequest());
+		Assert.assertNull(zillowWebServiceResponse.getMessage());
+		Assert.assertNull(zillowWebServiceResponse.getBody());
+	}
+
+	@Test
+	public void responseRequestTest() {
+		ZillowResponseRequest zillowResponseRequest = new ZillowResponseRequest();
+		zillowResponseRequest.setAddress("2114 Bigelow Ave");
+		zillowResponseRequest.setCityStateZip("Seattle, WA");
+
+		zillowWebServiceResponse.setRequest(zillowResponseRequest);
+
+		Assert.assertNotNull(zillowResponseRequest.getAddress());
+		Assert.assertNotNull(zillowResponseRequest.getCityStateZip());
+	}
+
+	@Test
+	public void responseMessageTest() {
+		ZillowResponseMessage zillowResponseMessage = new ZillowResponseMessage();
+		zillowResponseMessage.setCode(0);
+		zillowResponseMessage.setText("Request successfully processed");
+
+		zillowWebServiceResponse.setMessage(zillowResponseMessage);
+
+		Assert.assertNotNull(zillowResponseMessage.getCode());
+		Assert.assertNotNull(zillowResponseMessage.getText());
+	}
+
+	@Test
+	public void responseBodyTest() {
+		ZillowResponseBody zillowResponseBody = new ZillowResponseBody();
+		zillowResponseBody.setResults(new ArrayList<>());
+
+		zillowWebServiceResponse.setBody(zillowResponseBody);
+
+		Assert.assertNotNull(zillowResponseBody.getResults());
 	}
 }

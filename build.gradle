@@ -13,8 +13,10 @@ description = """Common library code"""
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+def javaVersion = "1.8"
+
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
 
 if (!hasProperty('mainClass')) {
     ext.mainClass = ''
@@ -49,8 +51,8 @@ jacocoTestReport {
 	reports {
 		html.enabled = true
 		xml.enabled = true
-		html.destination "${buildDir}/reports/jacoco/jacoco-html"
-		xml.destination "${buildDir}/reports/jacoco/jacoco.xml"
+		html.destination "$buildDir/reports/jacoco/jacoco-html"
+		xml.destination "$buildDir/reports/jacoco/jacoco.xml"
 	}
 }
 
@@ -66,12 +68,24 @@ cobertura {
 
 sonarqube {
     properties {
-		property "sonar.projectKey", "SantanaCreations"
+	    property "sonar.projectKey", "$group"
         property "sonar.projectName", "Santana Creations"
-		property "sonar.projectDescription", "Common library code"
+	    property "sonar.projectDescription", "$description"
+	    property "sonar.projectVersion", "$version"
 		property "sonar.sourceEncoding", "UTF-8"
 		property "sonar.host.url", "https://sonarqube.com"
+	    property "sonar.sources", "."
+	    property "sonar.java.binaries", "$output.classesDir.getPath()/"
 		property "sonar.java.libraries", dependencyCacheDir.getPath()
-		property "sonar.java.test.libraries", dependencyCacheDir.getPath()
+	    property "sonar.java.test.binaries", "$buildDir/classes/test/"
+	    property "sonar.java.test.libraries", dependencyCacheDir.getPath()
+	    property "sonar.cobertura.reportPath", "$cobertura.coverageReportDir/coverage.xml"
+	    property "sonar.jacoco.reportPath=$buildDir/jacoco/test.exec"
+	    property "sonar.groovy.jacoco.reportPath", "$buildDir/jacoco/test.exec"
+	    property "sonar.exclusions", "$reportsDir.getPath()/**, $testResultsDir.getPath()/test/binary/**, $buildDir/temp/**, $buildDir/tmp/**"
+	    property "sonar.java.source", javaVersion
+	    property "sonar.java.target", javaVersion
     }
+
+	cobertura.coverageReportDir
 }

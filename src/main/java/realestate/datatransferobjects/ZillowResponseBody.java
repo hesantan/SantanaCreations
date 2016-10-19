@@ -17,7 +17,6 @@ package realestate.datatransferobjects;
 
 import realestate.entities.zillow.ZillowPropertyReport;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,5 +24,14 @@ import java.util.List;
  * @author Santana Creations
  */
 public class ZillowResponseBody {
-	public List<ZillowPropertyReport> results = new ArrayList<>();
+
+	private List<ZillowPropertyReport> results;
+
+	public List<ZillowPropertyReport> getResults() {
+		return results;
+	}
+
+	public void setResults(List<ZillowPropertyReport> results) {
+		this.results = results;
+	}
 }

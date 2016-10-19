@@ -38,35 +38,31 @@ public class ZillowPropertyReportTest {
 
 	@Before
 	public void setUp() {
-		zillowPropertyReport.zPid = 12345678;
-		zillowPropertyReport.taxAssessmentYear = 2015;
-		zillowPropertyReport.taxAssessment = 1234567.0;
-		zillowPropertyReport.yearBuilt = 1990;
-		zillowPropertyReport.lotSizeSquareFeet = 1234;
-		zillowPropertyReport.finishedSquareFeet = 5678;
-		zillowPropertyReport.bathrooms = 1.2;
-		zillowPropertyReport.bedrooms = 4;
-		zillowPropertyReport.lastSoldDate = new Date();
-		zillowPropertyReport.lastSoldPrice = 125000;
-		zillowPropertyReport.lastSoldPriceCurrency = "USD";
+		zillowPropertyReport = new ZillowPropertyReport();
+		zillowPropertyReport.setZPid(12345678);
+		zillowPropertyReport.setTaxAssessmentYear(2016);
+		zillowPropertyReport.setTaxAssessment(1234567.0);
+		zillowPropertyReport.setYearBuilt(1990);
+		zillowPropertyReport.setLotSizeSquareFeet(1234);
+		zillowPropertyReport.setFinishedSquareFeet(5678);
+		zillowPropertyReport.setBathrooms(1.2);
+		zillowPropertyReport.setBedrooms(5);
+		zillowPropertyReport.setLastSoldDate(new Date());
+		zillowPropertyReport.setLastSoldPrice(125000, "USD");
 	}
 
 	@Test
 	public void initTest() {
-		ZillowPropertyReport zillowPropertyReport2 = new ZillowPropertyReport();
-		zillowPropertyReport2.zPid = 12345678;
-		zillowPropertyReport2.taxAssessmentYear = 2015;
-		zillowPropertyReport2.taxAssessment = 1234567.0;
-		zillowPropertyReport2.yearBuilt = 1990;
-		zillowPropertyReport2.lotSizeSquareFeet = 1234;
-		zillowPropertyReport2.finishedSquareFeet = 5678;
-		zillowPropertyReport2.bathrooms = 1.2;
-		zillowPropertyReport2.bedrooms = 4;
-		zillowPropertyReport2.lastSoldDate = new Date();
-		zillowPropertyReport2.lastSoldPrice = 125000;
-		zillowPropertyReport2.lastSoldPriceCurrency = "USD";
-
-		Assert.assertEquals(zillowPropertyReport.zPid, zillowPropertyReport2.zPid);
+		Assert.assertEquals(zillowPropertyReport.getZPid(), 12345678);
+		Assert.assertEquals(zillowPropertyReport.getTaxAssessmentYear(), 2016);
+		Assert.assertTrue(zillowPropertyReport.getTaxAssessment() == 1234567.0);
+		Assert.assertEquals(zillowPropertyReport.getYearBuilt(), 1990);
+		Assert.assertEquals(zillowPropertyReport.getLotSizeSquareFeet(), 1234);
+		Assert.assertEquals(zillowPropertyReport.getFinishedSquareFeet(), 5678);
+		Assert.assertTrue(zillowPropertyReport.getBathrooms() == 1.2);
+		Assert.assertEquals(zillowPropertyReport.getBedrooms(), 5);
+		Assert.assertNotNull(zillowPropertyReport.getLastSoldDate());
+		Assert.assertEquals(zillowPropertyReport.getLastSoldPrice(), 125000);
+		Assert.assertEquals(zillowPropertyReport.getLastSoldPriceCurrency(), "USD");
 	}
-
 }

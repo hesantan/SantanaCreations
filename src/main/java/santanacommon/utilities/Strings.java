@@ -30,7 +30,6 @@ public class Strings {
 	private static final String DEFAULT_URL_ENCODING = "UTF-8";
 
 	private Strings() {
-
 	}
 
     public static boolean isNullOrEmpty(String str) {
@@ -53,7 +52,7 @@ public class Strings {
 			Logger log = CustomLoggerFactory.getLogger(Strings.class.getName());
 			log.log(Level.FINE, "URL could not be " + encoding + " encoded", e);
 
-			throw new AssertionError("UTF-8 not supported");
+			throw new AssertionError(DEFAULT_URL_ENCODING + " not supported");
 		}
 	}
 
@@ -65,7 +64,7 @@ public class Strings {
 			Logger log = CustomLoggerFactory.getLogger(Strings.class.getName());
 			log.log(Level.FINE, "URL could not be " + encoding + " decoded", e);
 
-			throw new AssertionError("UTF-8 not supported");
+			throw new AssertionError(DEFAULT_URL_ENCODING + " not supported");
 		}
 	}
 }

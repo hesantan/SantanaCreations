@@ -12,7 +12,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 package santanacommon.utilities;
@@ -23,44 +22,29 @@ import org.junit.Test;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- * Test class for String utilities
+ * Test methods for CustomLoggerFactory
  *
  * @author Hector
- * @since 10/16/2016
+ * @since 10/18/2016
  */
-public class StringsTest {
+public class CustomLoggerFactoryTest {
 
 	@Test
 	public void testConstructorIsPrivate() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-		Constructor<Strings> constructor = Strings.class.getDeclaredConstructor();
+		Constructor<CustomLoggerFactory> constructor = CustomLoggerFactory.class.getDeclaredConstructor();
 		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
 		constructor.setAccessible(true);
 		constructor.newInstance();
 	}
 
 	@Test
-	public void isNullOrEmpty() {
-		Assert.assertTrue(Strings.isNullOrEmpty(""));
-		Assert.assertTrue(Strings.isNullOrEmpty(null));
-		Assert.assertFalse(Strings.isNullOrEmpty("Test String"));
+	public void getLogger() {
+		Logger log = CustomLoggerFactory.getLogger(getClass().getName());
+		log.log(Level.FINE, "Logging FINE");
 	}
 
-	@Test
-	public void urlEncoding() {
-		String decodedString = " The Test String +!#$%&'()*+,-./ ";
-		String encodedString = Strings.urlEncode(decodedString);
-		Assert.assertEquals(Strings.urlDecode(encodedString), decodedString);
-	}
-
-	@Test(expected = AssertionError.class)
-	public void decodeUnsupportedEncodingExceptionTest() {
-		Assert.assertEquals(Strings.urlDecode("", ""), Strings.urlDecode("", ""));
-	}
-
-	@Test(expected = AssertionError.class)
-	public void encodeUnsupportedEncodingExceptionTest() {
-		Assert.assertEquals(Strings.urlEncode("", ""), Strings.urlEncode("", ""));
-	}
 }

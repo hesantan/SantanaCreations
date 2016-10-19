@@ -137,10 +137,10 @@ public abstract class AbstractHttpProxy {
 				}
 			}
 
-			//int responseCode = urlConnection.getResponseCode();
+			int responseCode = urlConnection.getResponseCode();
 
-			//log.log(Level.INFO, "Sending \"{0}\" request to URL : {1}", new Object[]{method, url});
-			//log.log(Level.INFO, "Response Code : {0}", responseCode);
+			log.log(Level.FINE, "Sending \"{0}\" request to URL : {1}", new Object[]{method, url});
+			log.log(Level.FINE, "Response Code : {0}", responseCode);
 			
 			StringBuilder response;
 			

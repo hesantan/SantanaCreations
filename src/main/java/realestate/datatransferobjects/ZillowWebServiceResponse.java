@@ -20,7 +20,32 @@ package realestate.datatransferobjects;
  * @author Santana Creations
  */
 public class ZillowWebServiceResponse {
-	public ZillowResponseRequest request = null;
-	public ZillowResponseMessage message = null;
-	public ZillowResponseBody body = null;
+
+	private ZillowResponseRequest request;
+	private ZillowResponseMessage message;
+	private ZillowResponseBody body;
+
+	public ZillowResponseBody getBody() {
+		return body;
+	}
+
+	public void setBody(ZillowResponseBody body) {
+		this.body = body;
+	}
+
+	public ZillowResponseRequest getRequest() {
+		return request;
+	}
+
+	public void setRequest(ZillowResponseRequest request) {
+		this.request = request;
+	}
+
+	public ZillowResponseMessage getMessage() {
+		return message;
+	}
+
+	public void setMessage(ZillowResponseMessage message) {
+		this.message = message;
+	}
 }

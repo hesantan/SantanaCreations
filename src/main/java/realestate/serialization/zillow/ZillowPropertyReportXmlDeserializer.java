@@ -20,7 +20,7 @@ import org.w3c.dom.Document;
 import realestate.entities.zillow.ZillowPropertyReport;
 import santanacommon.serialization.interfaces.IXmlDeserializer;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -30,18 +30,18 @@ public class ZillowPropertyReportXmlDeserializer implements IXmlDeserializer<Zil
 
     @Override
     public ZillowPropertyReport deserialize(Document xmlDocument) {
+
 	    ZillowPropertyReport zillowPropertyReport = new ZillowPropertyReport();
-	    zillowPropertyReport.zPid = 12345678;
-	    zillowPropertyReport.taxAssessmentYear = 2015;
-	    zillowPropertyReport.taxAssessment = 1234567.0;
-	    zillowPropertyReport.yearBuilt = 1990;
-	    zillowPropertyReport.lotSizeSquareFeet = 1234;
-	    zillowPropertyReport.finishedSquareFeet = 5678;
-	    zillowPropertyReport.bathrooms = 1.2;
-	    zillowPropertyReport.bedrooms = 4;
-	    zillowPropertyReport.lastSoldDate = new Date();
-	    zillowPropertyReport.lastSoldPrice = 125000;
-	    zillowPropertyReport.lastSoldPriceCurrency = "USD";
+	    zillowPropertyReport.setZPid(48749425);
+	    zillowPropertyReport.setTaxAssessmentYear(2015);
+	    zillowPropertyReport.setTaxAssessment(1271000.0);
+	    zillowPropertyReport.setYearBuilt(1924);
+	    zillowPropertyReport.setLotSizeSquareFeet(4680);
+	    zillowPropertyReport.setFinishedSquareFeet(3470);
+	    zillowPropertyReport.setBathrooms(3.0);
+	    zillowPropertyReport.setBedrooms(4);
+	    zillowPropertyReport.setLastSoldDate(new GregorianCalendar(2008, 10, 26).getTime());
+	    zillowPropertyReport.setLastSoldPrice(1025000, "USD");
 
 	    return zillowPropertyReport;
     }

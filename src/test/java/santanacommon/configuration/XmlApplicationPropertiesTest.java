@@ -69,6 +69,6 @@ public class XmlApplicationPropertiesTest {
 	@SuppressWarnings("ResultOfMethodCallIgnored")
 	private void deleteConfigFile(String configFilePath) {
 		File configFile = new File(configFilePath);
-		configFile.delete();
+		Assert.assertNotNull(configFile.delete());
 	}
 }

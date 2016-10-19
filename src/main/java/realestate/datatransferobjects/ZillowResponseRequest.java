@@ -20,6 +20,23 @@ package realestate.datatransferobjects;
  * @author Santana Creations
  */
 public class ZillowResponseRequest {
-	public String address = "";
-	public String cityStateZip = "";
+
+	private String address;
+	private String cityStateZip;
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCityStateZip() {
+		return cityStateZip;
+	}
+
+	public void setCityStateZip(String cityStateZip) {
+		this.cityStateZip = cityStateZip;
+	}
 }
