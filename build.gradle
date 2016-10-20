@@ -43,13 +43,13 @@ test {
 		classDumpFile = file("$buildDir/jacoco/classpathdumps")
 	}
 
-	ignoreFailures = true
-	maxParallelForks = 100
+	//ignoreFailures = true
+	//maxParallelForks = 100
 
-	if (project.hasProperty('maxParallelForks'))
-		maxParallelForks = project.maxParallelForks as int
-	if (project.hasProperty('forkEvery'))
-		forkEvery = project.forkEvery as int
+	//if (project.hasProperty('maxParallelForks'))
+	//	maxParallelForks = project.maxParallelForks as int
+	//if (project.hasProperty('forkEvery'))
+	//	forkEvery = project.forkEvery as int
 }
 
 jacocoTestReport {

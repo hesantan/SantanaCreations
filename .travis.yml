@@ -16,7 +16,6 @@ cache:
   - $HOME/.m2
   - $HOME/.gradle/caches/
   - $HOME/.gradle/wrapper/
-  - $HOME/maven2
 script:
   - gradle clean build
   - gradle jacoco cobertura coveralls
