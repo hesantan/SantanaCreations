@@ -16,11 +16,12 @@ cache:
   - $HOME/.m2
   - $HOME/.gradle/caches/
   - $HOME/.gradle/wrapper/
-script: gradle clean build
-after_success:
-- gradle jacoco cobertura coveralls
-- bash <(curl -s https://codecov.io/bash)
-- sonar-scanner -Dsonar.login=$SONAR_TOKEN
+  - $HOME/maven2
+script:
+  - gradle clean build
+  - gradle jacoco cobertura coveralls
+  - bash <(curl -s https://codecov.io/bash)
+  - sonar-scanner -Dsonar.login=$SONAR_TOKEN
 notifications:
   email: false
   slack:
