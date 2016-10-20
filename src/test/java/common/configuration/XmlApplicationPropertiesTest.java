@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package santanacommon.configuration;
+package common.configuration;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -62,6 +62,13 @@ public class XmlApplicationPropertiesTest {
 	@Test
 	public void testFileNotFoundException() {
 		XmlApplicationProperties xmlApplicationPropertiesTemp = new XmlApplicationProperties("");
+		xmlApplicationPropertiesTemp.commit();
+		xmlApplicationPropertiesTemp.load();
+	}
+
+	@Test
+	public void testIOException() {
+		XmlApplicationProperties xmlApplicationPropertiesTemp = new XmlApplicationProperties("\\/\\/\\/\\/");
 		xmlApplicationPropertiesTemp.commit();
 		xmlApplicationPropertiesTemp.load();
 	}

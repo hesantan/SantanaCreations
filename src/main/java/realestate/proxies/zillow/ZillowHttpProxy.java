@@ -15,8 +15,8 @@
  */
 package realestate.proxies.zillow;
 
-import santanacommon.proxies.base.AbstractHttpProxy;
-import santanacommon.utilities.Strings;
+import common.proxies.base.AbstractHttpProxy;
+import common.utilities.Strings;
 
 import java.util.Date;
 import java.util.HashMap;

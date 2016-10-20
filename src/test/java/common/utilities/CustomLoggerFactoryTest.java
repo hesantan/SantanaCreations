@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package santanacommon.utilities;
+package common.utilities;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,11 +34,17 @@ import java.util.logging.Logger;
 public class CustomLoggerFactoryTest {
 
 	@Test
-	public void testConstructorIsPrivate() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-		Constructor<CustomLoggerFactory> constructor = CustomLoggerFactory.class.getDeclaredConstructor();
-		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
-		constructor.setAccessible(true);
-		constructor.newInstance();
+	public void testConstructorIsPrivate() {
+		Logger log = CustomLoggerFactory.getLogger(getClass().getName());
+
+		try {
+			Constructor<CustomLoggerFactory> constructor = CustomLoggerFactory.class.getDeclaredConstructor();
+			Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+			constructor.setAccessible(true);
+			constructor.newInstance();
+		} catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException ex) {
+			log.log(Level.FINE, null, ex);
+		}
 	}
 
 	@Test

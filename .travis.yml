@@ -6,6 +6,16 @@ addons:
 env:
   global:
   - secure: BZozBvVkXixzCPbRQfUOsFIItXTK4Fn12sEHsA0tZIE/c5WomMPoBUYpSu68J+bgCklewyOX42EDizcjGbShxDEs90OABcfPSMAcbYruh4/CzMPd7x4/cvj4C8T4PCHlQfffvmZYNW1pbTwJ6ZNN1yM9uDU2ZpAykNqj5ph3Zlm4/ReyE6X2Yv4/mQuQFIQr0jPQl5RW+AAkdoGDd/qiXXxeVIxK+xIc/X2H8iQ1IzY331++5eb3vCNZ4BHH8HoqHvgT8NERoWZE0PtvVbhllSRAcNq2VX3T/KoMOuaKro2YWTp6xh1zpz99jOoKoqjUOk/GtkgTUModOPR8PCCzo9ytIGqcraIHq3oF0niYJMj0d439NtHCQrDML8m2EzfTjCAYbLgLj7rvD1c+qsB6xpfZg5vFQnhP0yxUZ3c1+e1UwscGs9yYdjCSPlTbl/tMs4WL3xoruTbaeQF6T/F/DE8LcX/7x5roQuX784VnD8gKISLzaUKJ5hOeoZKQ62gBUg1sHRNIedZXCMHqtGLXeXWD4cH8RHPE/hAKcNyyZcFi+Kne8b2ecVO+Fb5UPdFACAI8QXrUWjeg0PeWR9IqKOiH037q3kLyY01fl90MfF2e7FHvkGM3gWpq3XvV+4LDTtxUyUFrXlI9pB9YMmU356DDN9AQp0gdMSJes/CnPmc=
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  timeout: 864000
+  directories:
+  - .autoconf
+  - $HOME/.m2
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
 script: gradle clean build
 after_success:
 - gradle jacoco cobertura coveralls
@@ -16,12 +26,12 @@ notifications:
   slack:
     rooms:
     - secure: HATwuj9Ki2Q41w2OEbjlaRBpcvCvyC90NSuXQhEXD07O9jwDcOIvayoUf4lCBu1m6cHUg6Bm4K8tLunOUEXKjJf6h4hiRfJW7MJ+jDnT8jMQ4ZPi2PuAHJ02m4NC9vckHIleseDJBOHCDMpqa89j9H4lKWNNXjZV0j29+WhrQZ9ntPM7RJWDet6uRFSTez/neGTknd5WTT52QP+7j+tVIJWFn0Zzpvq2HYHHlZr97GZF5O8Iw7sfIolAPhPUMn308LjC4vwmt55mavuvEYQP/RbACwaHgcBmkFMJ6ALdYHFUzI8qRA57Q/nMqx0A03TslJNn/aYfw/jzJd4lqeD6TQH/8MM+wr3UqDmoEfQAdBmluuVb60doRo3++iyjWCaErh3JSb7yMNYqosTLvhHt6VZ+hG0gpUE5FMXRg1461xGrX1vlT8NtP2OGgGa11CKB4dH6Xs6hbuVSQUnye73L+/NI7httqnHI1kaogzGWh1P0m1jxB+nw+BtJOjjSawuIIpiWo1oQmcBoh3eTQM2T65x2k4W0ggecRJgu2rWEUcnBcGJ008ikqjX3lti9/XsxDrWiJmnC+Fr/zcJXocOefKoDIIFN9Me2YufBmAZIiVh0I1imd3cG2SPOhsBLdKrLog851YQ1HefjtAB0smT3MHynICv37DeyJFp/mC7qSQM=
-    on_success: always
+    on_success: change
     on_failure: always
   pushover:
     api_key:
       secure: o3lAuV2JEYRyNpk8WzGYvlOmVWAI16flShjcugzuqcTJA3/7zr6g4kns3wPRi09LzxPr5npFVSycGew+kUjY2btc29jXODJqxTwsBGHrsHvcc4ng4AZJUSzU3tBj1zegVOi6oaSu2p+z4vPJvAsOUxogD9Jk24/I2hxrPKk32yvKdukT68HCL8+XWQhAjlgAJpCyi4/957D8dKJaiBo3fJXgj/Ymc2VqsrjVOn+LOSEFqKO00GwzSOtKaLx/ItiFMB9hK+e2hjGK1k6YT7cG4SLLAJ1lECU9KyZNed/fBWa2AxLw2ZpYJ8YO4kaDW8uO3YP63ng0SqbLLCgPk1gnRZTwhTNch3QGmioIcdYIhLRZpzJIelsSa5MHvOv3cx2+d/eyYNdUBPyAKCEGBox6JpT20CtoUBg4WxFwXGhabCE+qi5hVmCarhSe1NJwAhKGqARkFaI3cX94P6QmraV6fWV76BsGMVbnYuy33GLwhgyl8lmUwh3cyUjOSXCwgztISWd14wrc237VRpOZkiNFBYddttpSwU4Ba1bEQOezEGlQmjfWJNt/FgnlctldBzjRNmJUgUGogtTSb2umdhL8KecikG/Wg6KzkjbaxJQsdtTnM2+Kh/HbAqiDt4OAT4TKoizFT34W0yGvCLNDi+0LTzZmyjbEPu6nV7FEHO26fQU=
     users:
     - secure: WQOXKeZUHblrfSYPDf/OFmIpHxLKMIsJa5UK73aHuLNRYC42hyVM16QU/B2fOUIEeQt9G8q5UX3DJXPeRkvWVeTbyx6Wmy5JFcYdqR5BLPH5xId1W6ehlCyKEFKxz5birguIpvsxtcRjwhOmk0D/aoyI9fFIznpg4pp+qBBE3M892UYoQivlkS//QUfSqjHSZ0To44LrpRLBjmQAUip42WsS6Pfn46T/XnRoTSpwWF/Db6fFDVIFtx71Esy0vIE8HfbnVy7HcWGx6qKgp+lb2r6IIq2JRNIGVgJgPfDBqZruL4TBh0XsUXL5cT7BKVVq4toIBoe8Kl34YxTsbtwpCTWzgIIaGcy59/S/awB384ldX6l0eCMl6U4I/GKbDIRU9WN4FXEnEFLi4NoBFJJzNIlswWjyRrFT7gxkOew75qCkm86Iy1KNW2GZ0XVSnyXBkMwI7BKRGT5wgnzjMLdNmtXRjrXy9bJz07zvE4aeR3tEahYSuDQuqQspbbq986OLr/C69aVH1W4ZRUwN5PW4aVyFY3spzn1+z7l27uNHWQKh5sUDpJav50L3BXz0zLBIgR9tnQ/Yzg4aDfDz+o6LnEW8ehm8V+oKffqAs3TVasLBKR+GPFMvpD+deaN0HGsR411Hwcv2t2UUSCL+mYzcFwH3FOpxSgxWhHHJERmt6ak=
-    on_success: always
+    on_success: change
     on_failure: always

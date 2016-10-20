@@ -13,28 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package santanacommon.utilities;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+package common.serialization.interfaces;
 
 /**
- * Logger factory for package classes
- *
- * @author Hector
- * @since 10/16/2016
+ * Interface that defines basic operations for a deserializer
+ * @author Santana Creations
+ * @param <T1>  The type to deserialize
+ * @param <T2> The resulting type of the deserialization
  */
-public class CustomLoggerFactory {
-
-	private CustomLoggerFactory() {
-
-	}
-
-	public static Logger getLogger(String loggerName) {
-		Logger log = Logger.getLogger(loggerName);
-		log.setLevel(Level.INFO);
-		return log;
-	}
-	
+@FunctionalInterface
+interface IDeserializer<T1, T2> {
+    
+    /**
+     * Deserializes a given object type into another 
+     * @param object The object to deserialize
+     * @return A object representing the the input object
+     * in TOutput type
+     */
+    T2 deserialize(T1 object);
 }

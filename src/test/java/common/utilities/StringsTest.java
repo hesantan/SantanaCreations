@@ -15,7 +15,7 @@
  *
  */
 
-package santanacommon.utilities;
+package common.utilities;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -23,6 +23,8 @@ import org.junit.Test;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Test class for String utilities
@@ -33,11 +35,17 @@ import java.lang.reflect.Modifier;
 public class StringsTest {
 
 	@Test
-	public void testConstructorIsPrivate() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-		Constructor<Strings> constructor = Strings.class.getDeclaredConstructor();
-		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
-		constructor.setAccessible(true);
-		constructor.newInstance();
+	public void testConstructorIsPrivate() {
+		Logger log = CustomLoggerFactory.getLogger(getClass().getName());
+
+		try {
+			Constructor<Strings> constructor = Strings.class.getDeclaredConstructor();
+			Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+			constructor.setAccessible(true);
+			constructor.newInstance();
+		} catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException ex) {
+			log.log(Level.FINE, null, ex);
+		}
 	}
 
 	@Test

@@ -15,6 +15,7 @@
  */
 package realestate.proxies.zillow;
 
+import common.enums.HttpMethod;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -132,5 +133,23 @@ public class ZillowHttpProxyTest {
 		String serviceUri = "\\/\\/\\/\\";
 		String responseString = zillowHttpProxy.doPost(serviceUri, serviceUri);
 		Assert.assertEquals(responseString, "");
+	}
+
+	@Test
+	public void doHeadersTest() {
+		Assert.assertEquals(zillowHttpProxy.getHeaders(HttpMethod.GET).size(), 1);
+		Assert.assertEquals(zillowHttpProxy.getHeaders(HttpMethod.POST).size(), 0);
+		Assert.assertEquals(zillowHttpProxy.getHeaders(HttpMethod.PUT), null);
+		Assert.assertEquals(zillowHttpProxy.getHeaders(HttpMethod.DELETE), null);
+		Assert.assertEquals(zillowHttpProxy.getHeaders(HttpMethod.NONE), null);
+	}
+
+	@Test
+	public void doContentTypeTest() {
+		Assert.assertEquals(zillowHttpProxy.getContentType(HttpMethod.GET), "text/xml");
+		Assert.assertEquals(zillowHttpProxy.getContentType(HttpMethod.POST), null);
+		Assert.assertEquals(zillowHttpProxy.getContentType(HttpMethod.PUT), null);
+		Assert.assertEquals(zillowHttpProxy.getContentType(HttpMethod.DELETE), null);
+		Assert.assertEquals(zillowHttpProxy.getContentType(HttpMethod.NONE), null);
 	}
 }

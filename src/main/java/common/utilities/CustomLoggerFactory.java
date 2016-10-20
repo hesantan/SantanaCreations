@@ -13,18 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package santanacommon.serialization.interfaces;
 
-import org.w3c.dom.Document;
+package common.utilities;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
+ * Logger factory for package classes
  *
  * @author Hector
- * @param <T>
+ * @since 10/16/2016
  */
-public interface IXmlDeserializer<T> extends IDeserializer<Document, T> {
-    
-    @Override
-    T deserialize(Document xmlDocument);
-    
+public class CustomLoggerFactory {
+
+	private CustomLoggerFactory() {
+
+	}
+
+	public static Logger getLogger(String loggerName) {
+		Logger log = Logger.getLogger(loggerName);
+		log.setLevel(Level.INFO);
+		return log;
+	}
+	
 }

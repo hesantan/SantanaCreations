@@ -16,9 +16,9 @@
 
 package realestate.serialization.zillow;
 
+import common.serialization.interfaces.IXmlDeserializer;
 import org.w3c.dom.Document;
 import realestate.entities.zillow.ZillowPropertyReport;
-import santanacommon.serialization.interfaces.IXmlDeserializer;
 
 import java.util.GregorianCalendar;
 
