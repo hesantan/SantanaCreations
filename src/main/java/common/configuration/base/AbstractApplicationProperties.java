@@ -44,7 +44,7 @@ public abstract class AbstractApplicationProperties {
 		return configFileEncoding;
 	}
 	
-	public abstract void load();
+	public abstract boolean load();
 	
-	public abstract void commit();
+	public abstract boolean commit();
 }

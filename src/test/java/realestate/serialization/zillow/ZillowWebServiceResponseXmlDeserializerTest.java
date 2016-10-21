@@ -14,29 +14,26 @@
  *  limitations under the License.
  */
 
-package realestate.dataaccess.zillow;
+package realestate.serialization.zillow;
 
-import org.junit.Assert;
 import org.junit.Test;
-import realestate.proxies.zillow.ZillowHttpProxy;
 
 /**
- * Test for the Zillow Data Provider
+ * Test methods for the ZillowWebServiceResponse XML Deserializer
  *
  * @author Hector
- * @since 10/16/2016
+ * @since 10/20/2016
  */
-public class ZillowDataProviderTest {
-	private final ZillowDataProvider zillowDataProvider;
+public class ZillowWebServiceResponseXmlDeserializerTest {
 	
-	public ZillowDataProviderTest() {
-		ZillowHttpProxy zillowHttpProxy = new ZillowHttpProxy("http://www.zillow.com", "X1-ZWz19rhxouu5fv_4ye7m");
-		zillowDataProvider = new ZillowDataProvider(zillowHttpProxy);
+	private ZillowWebServiceResponseXmlDeserializer zillowWebServiceResponseXmlDeserializer;
+	
+	public ZillowWebServiceResponseXmlDeserializerTest() {
+		zillowWebServiceResponseXmlDeserializer = new ZillowWebServiceResponseXmlDeserializer();
 	}
 	
 	@Test
-	public void getDeepSearchResultsTest() {
-		Assert.assertNotEquals("", zillowDataProvider.getDeepSearchResults(""));
+	public void deserialize() {
+		zillowWebServiceResponseXmlDeserializer.deserialize(null);
 	}
-	
 }

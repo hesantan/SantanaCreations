@@ -43,20 +43,24 @@ class XmlApplicationProperties extends AbstractApplicationProperties {
 	}
 	
 	@Override
-	public void load() {
+	public boolean load() {
 		try (FileInputStream fileStream = new FileInputStream(getFilename())) {
 			properties.loadFromXML(fileStream);
+			return true;
 		} catch (IOException ex) {
 			log.log(Level.FINE, "XML Configuration could not be loaded.", ex);
+			return false;
 		}
 	}
 	
 	@Override
-	public void commit() {
+	public boolean commit() {
 		try (FileOutputStream fileStream = new FileOutputStream(getFilename())) {
 			properties.storeToXML(fileStream, getFileDescription(), getFileEncoding());
+			return true;
 		} catch (IOException ex) {
 			log.log(Level.FINE, "XML Configuration could not be saved.", ex);
+			return false;
 		}
 	}
 }

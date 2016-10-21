@@ -13,8 +13,9 @@ cache:
   timeout: 864000
   directories:
   - .autoconf
-  - $HOME/.sonar/cache
   - $HOME/.m2
+  - $HOME/.sonar/cache/
+  - $HOME/.sonarscanner/
   - $HOME/.gradle/caches/
   - $HOME/.gradle/wrapper/
 script:

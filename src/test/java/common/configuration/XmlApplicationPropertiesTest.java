@@ -22,6 +22,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * XML Configuration file tester
@@ -60,15 +61,15 @@ public class XmlApplicationPropertiesTest {
 	}
 
 	@Test
-	public void testFileNotFoundException() {
+	public void testFileNotFoundException2() {
 		XmlApplicationProperties xmlApplicationPropertiesTemp = new XmlApplicationProperties("");
-		xmlApplicationPropertiesTemp.commit();
 		xmlApplicationPropertiesTemp.load();
+		xmlApplicationPropertiesTemp.commit();
 	}
 
 	@Test
-	public void testIOException() {
-		XmlApplicationProperties xmlApplicationPropertiesTemp = new XmlApplicationProperties("\\/\\/\\/\\/");
+	public void testIOException() throws IOException {
+		XmlApplicationProperties xmlApplicationPropertiesTemp = new XmlApplicationProperties("\\////\\///\\////\\/");
 		xmlApplicationPropertiesTemp.commit();
 		xmlApplicationPropertiesTemp.load();
 	}

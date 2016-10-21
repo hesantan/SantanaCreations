@@ -112,29 +112,32 @@ public abstract class AbstractHttpProxy {
 	}
 
 	private String sendHttpRequest(HttpMethod method, Map<String, String> headers, String contentType, String url, String data) {
-		
-		if (Strings.isNullOrEmpty(url)) {
-			return "";
-		}
-		
 		try {
-			HttpURLConnection urlConnection = buildUrlConnection(url, data, method, contentType);
-			setUrlConnectionHeaders(urlConnection, headers);
-			writeContentToUrlConnection(urlConnection, data);
 
+			if (Strings.isNullOrEmpty(url)) {
+				return "";
+			}
+
+			HttpURLConnection urlConnection = getCompleteUrlConnection(method, headers, contentType, url, data);
 			urlConnection.connect();
-			int responseCode = urlConnection.getResponseCode();
 
 			log.log(Level.FINE, "Sending \"{0}\" request to URL : {1}", new Object[]{method, url});
-			log.log(Level.FINE, "Response Code : {0}", responseCode);
+			log.log(Level.FINE, "Response Code : {0}", urlConnection.getResponseCode());
 
 			StringBuilder response = getResponseFromUrlConnection(urlConnection);
 
 			return response.toString();
 		} catch (Exception ex) {
 			log.log(Level.FINE, null, ex);
+			return "";
 		}
-		return "";
+	}
+
+	private HttpURLConnection getCompleteUrlConnection(HttpMethod method, Map<String, String> headers, String contentType, String url, String data) throws IOException {
+		HttpURLConnection urlConnection = buildUrlConnection(url, data, method, contentType);
+		setUrlConnectionHeaders(urlConnection, headers);
+		writeContentToUrlConnection(urlConnection, data);
+		return urlConnection;
 	}
 
 	private HttpURLConnection buildUrlConnection(String url, String data, HttpMethod method, String contentType) throws IOException {
